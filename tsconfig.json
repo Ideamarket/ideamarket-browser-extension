@@ -13,7 +13,8 @@
 		/* Additional Checks */
 		"useDefineForClassFields": true,
 		"skipLibCheck": true,
-		"strictNullChecks": false
+		"strictNullChecks": false,
+		"typeRoots" : ["node_modules/@types", "source/types"]
 	},
 	"include": [
 		"source",

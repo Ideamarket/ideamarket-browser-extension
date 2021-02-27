@@ -60,7 +60,7 @@ module.exports = {
   entry: {
     manifest: path.join(sourcePath, 'manifest.json'),
     background: path.join(sourcePath, 'Background', 'index.ts'),
-    contentScript: path.join(sourcePath, 'ContentScript', 'index.ts'),
+    contentScript: path.join(sourcePath, 'ContentScript', 'index.tsx'),
     popup: path.join(sourcePath, 'Popup', 'index.tsx'),
     options: path.join(sourcePath, 'Options', 'index.tsx'),
   },
@@ -128,6 +128,7 @@ module.exports = {
           'sass-loader', // Takes the Sass/SCSS file and compiles to the CSS
         ],
       },
+      { test: /\.(png|jpg|gif)$/i, loader: "url-loader" },
     ],
   },
 
