@@ -22,4 +22,16 @@
             display: none;
         }
     }
+    .hover-alert {
+        display: block;
+        background: yellow;
+        padding: 35px;
+        border: 2px solid red;
+        z-index: 4 !important;
+        position: fixed;
+        top: 5px;
+        &.hidden-alert {
+            display: none;
+        }
+    }
 }

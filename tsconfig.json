@@ -14,6 +14,8 @@
 		"useDefineForClassFields": true,
 		"skipLibCheck": true,
 		"strictNullChecks": false,
+		"moduleResolution": "node",
+		"allowJs": true,
 		"typeRoots" : ["node_modules/@types", "source/types"]
 	},
 	"include": [

@@ -62,19 +62,33 @@ function StartIdeaMarket() {
   }, 1000, 100000)
 }
 
+function func(item: HTMLElement)
+{ 
+  item.querySelector('.hover-alert').classList.remove("hidden-alert");
+}
+
+function func1(item: HTMLElement)
+{
+  item.querySelector('.hover-alert').classList.add("hidden-alert");
+}
 
 function AddIdeaMarket(){
   allTweets.forEach(tweet => {
     if(!tweet.querySelector('.ideamarket-listing')){
       const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
-      const el = document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true);
+      const el = (document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement);
+
+      el.addEventListener("mouseover", () => func(el), false);
+      el.addEventListener("mouseout", () => func1(el), false);
+
+
       if(Object.prototype.hasOwnProperty.call(listingsData,username) && listingsData[username].rank) {
-        (el as HTMLElement).classList.add("listed");
-        (el as HTMLElement).querySelector('.ideamarket-rank').textContent = listingsData[username].rank
+        el.classList.add("listed");
+        el.querySelector('.ideamarket-rank').textContent = listingsData[username].rank
       } else {
-        (el as HTMLElement).classList.add("notlisted");
+        el.classList.add("notlisted");
       }
-      tweet.querySelector(':scope div[data-testid="caret"]').parentNode.appendChild(el);
+      tweet.appendChild(el);
     }
   })
 }
