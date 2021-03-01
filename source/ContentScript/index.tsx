@@ -45,7 +45,6 @@ if (window.location.host.includes('twitter.com')) {
 
 // Substack
 if (window.location.host.includes('substack.com')) {
-  // ReactDOM.render(<Options />, document.body);
   // console.log(document.querySelectorAll('div[data-testid="tweet"]'));
 }
 
@@ -62,25 +61,13 @@ function StartIdeaMarket() {
   }, 1000, 100000)
 }
 
-function func(item: HTMLElement)
-{ 
-  item.querySelector('.hover-alert').classList.remove("hidden-alert");
-}
-
-function func1(item: HTMLElement)
-{
-  item.querySelector('.hover-alert').classList.add("hidden-alert");
-}
-
 function AddIdeaMarket(){
   allTweets.forEach(tweet => {
-    if(!tweet.querySelector('.ideamarket-listing')){
+    if(!tweet.parentNode.querySelector('.ideamarket-listing')){
       const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
       const el = (document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement);
 
-      el.addEventListener("mouseover", () => func(el), false);
-      el.addEventListener("mouseout", () => func1(el), false);
-
+      el.addEventListener("mouseover", (e) => showAlert(e, listingsData[username]), false);
 
       if(Object.prototype.hasOwnProperty.call(listingsData,username) && listingsData[username].rank) {
         el.classList.add("listed");
@@ -88,23 +75,38 @@ function AddIdeaMarket(){
       } else {
         el.classList.add("notlisted");
       }
-      tweet.appendChild(el);
+      tweet.parentNode.appendChild(el);
     }
   })
+}
+
+function showAlert(event: MouseEvent, userdata: Listing) {
+  const hoverAlert = (document.querySelector('.ideamarket-hover-alert').cloneNode(true) as HTMLElement)
+  AddDateInAlert(hoverAlert, userdata);
+  hoverAlert.setAttribute('style', `top:${event.clientY - 35}px;left:${event.clientX - 90}px`)
+  function removeAlert(hoverAlert: HTMLElement) {
+    hoverAlert.parentNode.removeChild(hoverAlert);
+  }
+  hoverAlert.addEventListener("mouseleave", () => removeAlert(hoverAlert), false);
+  document.addEventListener("scroll", () => removeAlert(hoverAlert), false)
+  document.body.append(hoverAlert);
+}
+
+function AddDateInAlert(hoverAlert: HTMLElement, userdata: Listing) {
+  if(userdata) {
+    hoverAlert.classList.add('listed')
+  } else {
+    hoverAlert.classList.add('unlisted')
+  }
+  return hoverAlert;
 }
 
 function AddIdeaMarketCompToDom() {
   const IdeaMarketContainer = document.createElement('div')
   IdeaMarketContainer.setAttribute('id', 'ideamarket-container')
-  IdeaMarketContainer.style.position = "absolute";
-  IdeaMarketContainer.style.display = "none"; 
-
+  IdeaMarketContainer.style.display = 'none';
   document.body.append(IdeaMarketContainer)
-  ReactDOM.render(
-    <Container />,
-    document.querySelector('#ideamarket-container')
-  )
-
+  ReactDOM.render(<Container />, document.querySelector('#ideamarket-container'))
 }
 
 export {}

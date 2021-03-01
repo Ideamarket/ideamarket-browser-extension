@@ -1,8 +1,15 @@
+#ideamarket-container {
+    position: absolute;
+    font-family: sans-serif;
+    // display: none;
+}
+
 .ideamarket-listing {
+    font-family: sans-serif;
     cursor: pointer;
     position: absolute;
     right: 25px;
-    top: -5px;
+    top: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,15 +29,83 @@
             display: none;
         }
     }
-    .hover-alert {
-        display: block;
-        background: yellow;
-        padding: 35px;
-        border: 2px solid red;
-        z-index: 4 !important;
-        position: fixed;
-        top: 5px;
-        &.hidden-alert {
+}
+.ideamarket-hover-alert {
+    font-family: sans-serif;
+    display: block;
+    background: white;
+    width: 180px;
+    border: 2px solid rgba(112,128,144,0.4);
+    border-radius: 10px;
+    overflow: auto;
+    z-index: 4 !important;
+    position: fixed;
+    top: 5px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    
+    .ideamarket-alert-bottom {
+        background-color: rgb(246, 246, 246);
+    }
+
+    .ideamarket-unlisted-container, .ideamarket-listed-container {
+        font-weight: bold;
+        font-size: 1.4em;
+        border-bottom: 2px solid rgba(112,128,144,0.2);
+    }
+    
+    .ideamarket-unlisted-container {
+        padding: 15px;
+    }
+    
+    .ideamarket-listed-container {
+        > div {
+            display: inline-block;
+            width: calc(50% - 1px);
+            padding: 15px 0;
+            &:first-of-type {
+                border-right: 2px solid rgba(112,128,144,0.2);
+            }
+            &:last-of-type {
+                background-color: rgb(246, 246, 246);
+            }
+            > div:last-of-type {
+                font-size: 0.5em;
+                color: rgb(112,128,144);
+            }
+        }
+    }
+
+    .ideamarket-button {
+        border-radius: 10px;
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        margin: 10px;
+        cursor: pointer;
+    }
+    
+    .ideamarket-powered-by-text {
+        font-size: 0.7em;
+        padding-bottom: 10px;
+        color: rgb(112,128,144);
+        font-weight: bold;
+        letter-spacing: -0.5px;
+        span {
+            color: black;
+        }
+    }
+
+    &.listed {
+        .ideamarket-unlisted-container, .ideamarket-unlisted-button {
+            display: none;
+        }
+    }
+
+    &.unlisted {
+        .ideamarket-listed-container, .ideamarket-listed-button {
             display: none;
         }
     }
