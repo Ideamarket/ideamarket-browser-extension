@@ -113,14 +113,10 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [
-                  [
-                    'autoprefixer',
-                    {
-                      // Options
-                    },
-                  ],
-                ],
+                plugins: {
+                  tailwindcss: {},
+                  autoprefixer: {},
+                },
               },
             },
           },
@@ -128,7 +124,7 @@ module.exports = {
           'sass-loader', // Takes the Sass/SCSS file and compiles to the CSS
         ],
       },
-      { test: /\.(png|jpg|gif)$/i, loader: "url-loader" },
+      { test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/i, loader: "url-loader" },
     ],
   },
 

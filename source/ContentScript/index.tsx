@@ -75,7 +75,7 @@ function AddIdeaMarket(){
       } else {
         el.classList.add("notlisted");
       }
-      tweet.parentNode.appendChild(el);
+      tweet.querySelector('div[data-testid="caret"]').parentNode.appendChild(el);
     }
   })
 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import Popup from '../Popup/Popup';
 
-import Options from './Options';
-
-ReactDOM.render(<Options />, document.getElementById('options-root'));
+ReactDOM.render(<Popup />, document.getElementById('options-root'));
