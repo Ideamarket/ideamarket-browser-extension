@@ -12,12 +12,12 @@ const Container: React.FC = () => {
         </div>
         <div  className="ideamarket-listed-container">
           <div className="inline-block">
-            <div>17</div>
+            <div className="ideamarket-listed-rank">17</div>
             <div>Rank</div>
           </div>
           <div className="inline-block bg-extension-light-1 dark:bg-extension-dark-1">
-            <div>$2.41</div>
-            <div>+5.73%</div>
+            <div className="ideamarket-listed-price">$2.41</div>
+            <div className="ideamarket-listed-day-change">+5.73%</div>
           </div>
         </div>
         <div className="ideamarket-alert-bottom bg-extension-light-1 dark:bg-extension-dark-1">

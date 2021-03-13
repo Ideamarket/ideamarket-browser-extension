@@ -56,10 +56,12 @@
             padding: 15px 0;
             &:first-of-type {
                 border-right: 2px solid rgba(112,128,144,0.2);
+                > div:last-of-type {
+                    color: rgb(161, 171, 181);
+                }
             }
             > div:last-of-type {
                 font-size: 0.5em;
-                color: rgb(161, 171, 181);
             }
         }
     }

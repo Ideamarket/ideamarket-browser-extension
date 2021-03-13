@@ -24,7 +24,8 @@ const listingsData:Listings = {
   '@elonmusk': {
     rank: '1',
     price: '3.067',
-    dayChange: '-0.064'
+    dayChange: '-0.064%',
+    market: 'twitter'
   }
 }
 
@@ -37,12 +38,10 @@ function init() {
     // Twitter
     if (currentDomain.includes('twitter.com')) {
       StartIdeaMarket();
-      checkURLchange(window.location.href, function() {
-        StartIdeaMarket();
-      });
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        StartIdeaMarket();
-      });
+      // when url is changed in twitter restart
+      checkURLchange(window.location.href, StartIdeaMarket);
+      // when system theme is changed in twitter restart
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(() => StartIdeaMarket(), 3000));
     }
     // Substack
     if (currentDomain.includes('substack.com')) {
@@ -58,6 +57,10 @@ function checkIfActivatedDomain(currentDomain: string) {
 
 function StartIdeaMarket() {
   setThemeWithSelection();
+  startIdeaMarketTwitter();
+}
+
+function startIdeaMarketTwitter() {
   waitForElementToDisplay("div[data-testid=\"tweet\"]",() => {
     // Add IdeaMarket to available Tweets
     allTweets = document.querySelectorAll('div[data-testid="tweet"]');
@@ -97,7 +100,7 @@ function showAlert(event: MouseEvent, username: string) {
   AddDataInAlertBox(hoverAlert, username);
   hoverAlert.setAttribute('style', `top:${event.clientY - 35}px;left:${event.clientX - 90}px`)
   function removeAlert(hoverAlert: HTMLElement) {
-    hoverAlert.parentNode.removeChild(hoverAlert);
+    hoverAlert?.parentNode?.removeChild(hoverAlert);
   }
   hoverAlert.addEventListener("mouseleave", () => removeAlert(hoverAlert), false);
   document.addEventListener("scroll", () => removeAlert(hoverAlert), false)
@@ -108,6 +111,17 @@ function AddDataInAlertBox(hoverAlert: HTMLElement, username: string) {
   const userdata = listingsData[username]
   if(userdata) {
     hoverAlert.classList.add('listed')
+    hoverAlert.querySelector('.ideamarket-listed-rank').textContent = userdata.rank
+    hoverAlert.querySelector('.ideamarket-listed-price').textContent = userdata.price
+    const dayChangeDiv = hoverAlert.querySelector('.ideamarket-listed-day-change');
+    dayChangeDiv.textContent = userdata.dayChange
+    if(userdata.dayChange[0] === '-') {
+      dayChangeDiv.classList.add('text-brand-red')
+      dayChangeDiv.classList.add('dark:text-red-500')
+    } else {
+      dayChangeDiv.classList.add('text-brand-green')
+    }
+    (hoverAlert.querySelector('.ideamarket-listed-button').parentNode as Element).setAttribute('href', `https://ideamarket.com/i/${userdata.market}/${username}`)
   } else {
     hoverAlert.classList.add('unlisted')
   }
