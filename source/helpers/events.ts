@@ -1,3 +1,4 @@
+import { browser } from 'webextension-polyfill-ts';
 
 let oldURL = "";
 function checkURLchange(currentURL: string, callback: { (): void; (): void; }){
@@ -29,9 +30,8 @@ function waitForElementToDisplay(selector: string, callback: VoidFunction, check
   })();
 }
 
-function DetectChanges(callbackTrigger: { (): void; (): void; }) {
+function DetectChangesOnElement(targetNode: Node, callbackTrigger: { (): void; (): void; }) {
   let lastExcecutionTime = new Date().getTime();
-  const targetNode = document.querySelector('div[data-testid="primaryColumn"] section > div > div');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const callback = (mutationsList: any) => {
     for(const mutation of mutationsList) {
@@ -48,8 +48,36 @@ function DetectChanges(callbackTrigger: { (): void; (): void; }) {
   observer.observe(targetNode, { attributes: true, childList: true });
 }
 
+function setThemeWithSelection() {
+  const root = document.getElementsByTagName( 'html' )[0]; 
+  browser.storage.local.get("theme")
+    .then((item) => {
+      let {theme} = item
+      if(theme === 'System Default') {
+        theme = 'Light'
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme =  'Dark';
+        }
+      }
+      if(theme === 'Dark') {
+        root.classList.add('dark');
+        return;
+      }
+      root.classList.remove('dark');
+    }, () => {
+      // console.log('no theme selected')
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.classList.add('dark'); 
+        return;
+      }
+      root.classList.remove('dark'); 
+    });
+
+}
+
 export {
   checkURLchange,
   waitForElementToDisplay,
-  DetectChanges
+  DetectChangesOnElement,
+  setThemeWithSelection
 }

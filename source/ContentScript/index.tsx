@@ -5,7 +5,8 @@ import Container from '../components/Container'
 import { 
   checkURLchange,
   waitForElementToDisplay,
-  DetectChanges 
+  DetectChangesOnElement, 
+  setThemeWithSelection
 } from "../helpers/events";
 
 // Twitter Market
@@ -27,62 +28,73 @@ const listingsData:Listings = {
   }
 }
 
+init();
 
-if (window.location.host.includes('twitter.com')) {
-  AddIdeaMarketCompToDom()
-  StartIdeaMarket();
-  checkURLchange(window.location.href, function() {
-    StartIdeaMarket();
-  });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    const newColorScheme = e.matches ? "dark" : "light";
-    console.log(newColorScheme)
-    setTimeout(() => {
+function init() {
+  const currentDomain = window.location.host;
+  if(checkIfActivatedDomain(currentDomain)) {
+    AddIdeaMarketContainerToDom();
+    // Twitter
+    if (currentDomain.includes('twitter.com')) {
       StartIdeaMarket();
-    }, 3000);
-  });
+      checkURLchange(window.location.href, function() {
+        StartIdeaMarket();
+      });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        StartIdeaMarket();
+      });
+    }
+    // Substack
+    if (currentDomain.includes('substack.com')) {
+      // console.log(document.querySelectorAll('div[data-testid="tweet"]'));
+    }
+  }
 }
 
-// Substack
-if (window.location.host.includes('substack.com')) {
-  // console.log(document.querySelectorAll('div[data-testid="tweet"]'));
+function checkIfActivatedDomain(currentDomain: string) {
+  const domainsActivated = ['twitter.com', 'substack.com']
+  return domainsActivated.find(element => element.includes(currentDomain));
 }
 
 function StartIdeaMarket() {
+  setThemeWithSelection();
   waitForElementToDisplay("div[data-testid=\"tweet\"]",() => {
     // Add IdeaMarket to available Tweets
     allTweets = document.querySelectorAll('div[data-testid="tweet"]');
-    AddIdeaMarket();
+    allTweets.forEach(tweet => {
+      const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
+      AddIdeaMarket(tweet, username);
+    });
+    
     // Detect changes in tweets
-    DetectChanges(function(){
+    const targetNode = document.querySelector('div[data-testid="primaryColumn"] section > div > div');
+    DetectChangesOnElement(targetNode, function() {
       allTweets = document.querySelectorAll('div[data-testid="tweet"]');
-      AddIdeaMarket();
+      allTweets.forEach(tweet => {
+        const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
+        AddIdeaMarket(tweet, username);
+      });
     })
   }, 1000, 100000)
 }
 
-function AddIdeaMarket(){
-  allTweets.forEach(tweet => {
-    if(!tweet.parentNode.querySelector('.ideamarket-listing')){
-      const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
-      const el = (document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement);
-
-      el.addEventListener("mouseover", (e) => showAlert(e, listingsData[username]), false);
-
-      if(Object.prototype.hasOwnProperty.call(listingsData,username) && listingsData[username].rank) {
-        el.classList.add("listed");
-        el.querySelector('.ideamarket-rank').textContent = listingsData[username].rank
-      } else {
-        el.classList.add("notlisted");
-      }
-      tweet.querySelector('div[data-testid="caret"]').parentNode.appendChild(el);
+function AddIdeaMarket(tweet: Element, username: string){
+  if(!tweet.parentNode.querySelector('.ideamarket-listing')){
+    const el = (document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement);
+    el.addEventListener("mouseover", (e) => showAlert(e, username), false);
+    if(Object.prototype.hasOwnProperty.call(listingsData,username) && listingsData[username].rank) {
+      el.classList.add("listed");
+      el.querySelector('.ideamarket-rank').textContent = listingsData[username].rank
+    } else {
+      el.classList.add("unlisted");
     }
-  })
+    tweet.querySelector('div[data-testid="caret"]').parentNode.appendChild(el);
+  }
 }
 
-function showAlert(event: MouseEvent, userdata: Listing) {
+function showAlert(event: MouseEvent, username: string) {
   const hoverAlert = (document.querySelector('.ideamarket-hover-alert').cloneNode(true) as HTMLElement)
-  AddDateInAlert(hoverAlert, userdata);
+  AddDataInAlertBox(hoverAlert, username);
   hoverAlert.setAttribute('style', `top:${event.clientY - 35}px;left:${event.clientX - 90}px`)
   function removeAlert(hoverAlert: HTMLElement) {
     hoverAlert.parentNode.removeChild(hoverAlert);
@@ -92,19 +104,18 @@ function showAlert(event: MouseEvent, userdata: Listing) {
   document.body.append(hoverAlert);
 }
 
-function AddDateInAlert(hoverAlert: HTMLElement, userdata: Listing) {
+function AddDataInAlertBox(hoverAlert: HTMLElement, username: string) {
+  const userdata = listingsData[username]
   if(userdata) {
     hoverAlert.classList.add('listed')
   } else {
     hoverAlert.classList.add('unlisted')
   }
-  return hoverAlert;
 }
 
-function AddIdeaMarketCompToDom() {
+function AddIdeaMarketContainerToDom() {
   const IdeaMarketContainer = document.createElement('div')
   IdeaMarketContainer.setAttribute('id', 'ideamarket-container')
-  IdeaMarketContainer.style.display = 'none';
   document.body.append(IdeaMarketContainer)
   ReactDOM.render(<Container />, document.querySelector('#ideamarket-container'))
 }

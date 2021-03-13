@@ -8,21 +8,49 @@ function openWebPage(url: string): Promise<Tabs.Tab> {
   return browser.tabs.create({url});
 }
 
-type IdeaMarketThemeValue = {
+type IdeaMarketThemesValue = {
   value: string
   label: string
 }
 
-const ideaMarketTheme: IdeaMarketThemeValue[] = [
+const ideaMarketThemes: IdeaMarketThemesValue[] = [
+  { value: 'System Default', label: 'System Default' },
   { value: 'Light', label: 'Light' },
   { value: 'Dark', label: 'Dark' },
-  { value: 'System Default', label: 'System Default' },
 ]
 
+let intialSelectedTheme = 'System Default';
+
+
+browser.storage.local.get("theme")
+.then((item) => {
+    intialSelectedTheme = item.theme
+  }, () => {
+    console.log('no theme selected')
+  });
+  
+// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//   // dark mode
+//   console.log("dark mode")
+// }
+// window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+//   const newColorScheme = e.matches ? "dark" : "light";
+//   console.log(newColorScheme)
+// });
 
 const Popup: React.FC = () => {
+  const [theme, settheme] = React.useState(intialSelectedTheme)
+  React.useEffect(() => {
+    browser.storage.local.get("theme")
+      .then((item) => {
+        settheme(item.theme)
+        console.log(item.theme)
+      }, () => {
+        console.log('no theme selected')
+      });
+  }, [])
   return (
-    <section id="popup">
+    <section id="popup" className="bg-white dark:bg-black">
       <nav className="w-full shadow bg-top-desktop p-5 text-center">
         <div className="flex justify-center cursor-pointer" onClick={(): Promise<Tabs.Tab> => {
           return openWebPage('https://ideamarket.io');
@@ -39,11 +67,20 @@ const Popup: React.FC = () => {
           className="w-full border-gray-200 rounded-md text-brand-gray-2 trade-select"
           isClearable={false}
           isSearchable={false}
-          onChange={() => {
+          onChange={async (option) => {
+            browser.storage.local.set({theme: option.value})
+              .then(() => {
+                settheme(option.value)
+              }, () => {
+                console.log('error')
+              });
+
+            console.log(option.value)
             // slippage = option.value
           }}
-          options={ideaMarketTheme}
-          defaultValue={ideaMarketTheme[0]}
+          options={ideaMarketThemes}
+          value={ideaMarketThemes.find(o => o.value ===  theme)}
+          defaultValue={ideaMarketThemes.find(o => o.value ===  theme)}
         />
       </div>
       <div className="ml-3 text-brand-new-dark font-semibold">

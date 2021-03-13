@@ -3,7 +3,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  darkMode: false,
+  darkMode: 'class',
   purge: {
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
   },
@@ -25,6 +25,12 @@ module.exports = {
         'brand-new-blue': '#074ef0',
         'brand-new-dark': '#1a1d3f',
         'brand-border-gray': '#dce2e9',
+        // extension-colors
+        'extension-dark-1': '#474747',
+        'extension-dark-2': '#575656',
+        'extension-light-1': '#f6f6f6',
+        'extension-light-2': '#fdfdfd',
+        'extension-button-blue': '#0b3dd9'
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

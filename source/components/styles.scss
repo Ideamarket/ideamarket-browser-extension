@@ -1,3 +1,8 @@
+// @import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "../styles/fonts";
+
 #ideamarket-container {
     position: absolute;
     font-family: sans-serif;
@@ -6,13 +11,8 @@
 
 .ideamarket-listing {
     font-family: sans-serif;
-    cursor: pointer;
-    position: absolute;
     right: 25px;
     top: -5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     .logo {
         width: 30px;
     }
@@ -20,33 +20,25 @@
         color: grey
     }
     &.listed {
-        .notlisted-logo {
+        .unlisted-logo {
             display: none;
         }
     }
-    &.notlisted, .ideamarket-rank {
+    &.unlisted, .ideamarket-rank {
         .listed-logo {
             display: none;
         }
     }
 }
+
 .ideamarket-hover-alert {
     font-family: sans-serif;
-    display: block;
-    background: white;
     width: 180px;
     border: 2px solid rgba(112,128,144,0.4);
     border-radius: 10px;
-    overflow: auto;
     z-index: 4 !important;
-    position: fixed;
     top: 5px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    
-    .ideamarket-alert-bottom {
-        background-color: rgb(246, 246, 246);
-    }
 
     .ideamarket-unlisted-container, .ideamarket-listed-container {
         font-weight: bold;
@@ -60,42 +52,29 @@
     
     .ideamarket-listed-container {
         > div {
-            display: inline-block;
             width: calc(50% - 1px);
             padding: 15px 0;
             &:first-of-type {
                 border-right: 2px solid rgba(112,128,144,0.2);
             }
-            &:last-of-type {
-                background-color: rgb(246, 246, 246);
-            }
             > div:last-of-type {
                 font-size: 0.5em;
-                color: rgb(112,128,144);
+                color: rgb(161, 171, 181);
             }
         }
     }
 
     .ideamarket-button {
-        border-radius: 10px;
-        background-color: blue;
-        color: white;
-        border: none;
         padding: 10px 20px;
-        font-weight: bold;
+        background-color: blue;
         margin: 10px;
-        cursor: pointer;
     }
     
     .ideamarket-powered-by-text {
         font-size: 0.7em;
         padding-bottom: 10px;
-        color: rgb(112,128,144);
-        font-weight: bold;
+        color: rgb(161, 171, 181);
         letter-spacing: -0.5px;
-        span {
-            color: black;
-        }
     }
 
     &.listed {
