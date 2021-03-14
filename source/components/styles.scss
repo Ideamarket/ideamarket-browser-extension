@@ -6,7 +6,7 @@
 #ideamarket-container {
     position: absolute;
     font-family: sans-serif;
-    // display: none;
+    display: none;
 }
 
 .ideamarket-listing {
@@ -20,12 +20,28 @@
         color: grey
     }
     &.listed {
-        .unlisted-logo {
+        .unlisted-logo, .loading-icon {
             display: none;
         }
     }
-    &.unlisted, .ideamarket-rank {
-        .listed-logo {
+    &.unlisted {
+        .listed-logo, .loading-icon {
+            display: none;
+        }
+    }
+    &.loading {
+        .loading-icon {
+            @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+            @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+            @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+            -webkit-animation:spin 1.5s linear infinite;
+            -moz-animation:spin 1.5s linear infinite;
+            animation:spin 1.5s linear infinite;
+            width: 20px !important;
+            margin-top: 5px;
+            margin-right:5px;
+        }
+        .listed-logo, .unlisted-logo {
             display: none;
         }
     }

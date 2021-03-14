@@ -44,7 +44,6 @@ const Popup: React.FC = () => {
     browser.storage.local.get("theme")
       .then((item) => {
         settheme(item.theme)
-        console.log(item.theme)
       }, () => {
         console.log('no theme selected')
       });
@@ -74,8 +73,6 @@ const Popup: React.FC = () => {
               }, () => {
                 console.log('error')
               });
-
-            console.log(option.value)
             // slippage = option.value
           }}
           options={ideaMarketThemes}

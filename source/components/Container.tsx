@@ -1,5 +1,6 @@
 import * as React from 'react';
 import icon from '../assets/icons/logo.png';
+import loadingicon from '../assets/icons/loading.svg';
 import disabledLogo from '../assets/icons/disabledLogo.png';
 import './styles.scss'
 
@@ -21,10 +22,10 @@ const Container: React.FC = () => {
           </div>
         </div>
         <div className="ideamarket-alert-bottom bg-extension-light-1 dark:bg-extension-dark-1">
-          <a href="https://ideamarket.com" target="_blank" rel="noreferrer">
+          <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
             <button className="ideamarket-button ideamarket-unlisted-button rounded-lg text-white border-none cursor-pointer font-bold">List</button>
           </a>
-          <a href="https://ideamarket.com" target="_blank" rel="noreferrer">
+          <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
             <button className="ideamarket-button ideamarket-listed-button rounded-lg text-white border-none cursor-pointer font-bold">Buy</button>
           </a>
           <div className="ideamarket-powered-by-text font-bold">Powered by <span className="text-black dark:text-white">Ideamarket</span></div>
@@ -34,6 +35,7 @@ const Container: React.FC = () => {
         <span className="ideamarket-rank"></span>
         <img className="logo listed-logo" src={icon}/>
         <img className="logo unlisted-logo" src={disabledLogo}/>
+        <img className="logo loading-icon" src={loadingicon}/>
       </div>
     </div>
   );

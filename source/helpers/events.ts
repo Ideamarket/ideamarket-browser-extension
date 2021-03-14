@@ -1,8 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 
 let oldURL = "";
+
 function checkURLchange(currentURL: string, callback: { (): void; (): void; }){
-  if(currentURL != oldURL){
+  if(oldURL && currentURL != oldURL){
     callback();
     oldURL = currentURL;
   }
@@ -37,7 +38,7 @@ function DetectChangesOnElement(targetNode: Node, callbackTrigger: { (): void; (
     for(const mutation of mutationsList) {
       if (mutation.type == 'childList') {
         // Make sure we are not excuting immedietly 
-        if((new Date().getTime() - lastExcecutionTime) > 100) {
+        if((new Date().getTime() - lastExcecutionTime) > 500) {
           lastExcecutionTime = new Date().getTime();
           callbackTrigger();
         }
@@ -45,7 +46,7 @@ function DetectChangesOnElement(targetNode: Node, callbackTrigger: { (): void; (
     }
   };
   const observer = new MutationObserver(callback);
-  observer.observe(targetNode, { attributes: true, childList: true });
+  observer.observe(targetNode, { attributes: false, childList: true });
 }
 
 function setThemeWithSelection() {
