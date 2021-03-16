@@ -173,16 +173,17 @@ function AddDataInAlertBox(hoverAlert: HTMLElement, username: string) {
   if(userdata?.rank) {
     hoverAlert.classList.add('listed')
     hoverAlert.querySelector('.ideamarket-listed-rank').textContent = userdata.rank
-    hoverAlert.querySelector('.ideamarket-listed-price').textContent = userdata.price
+    hoverAlert.querySelector('.ideamarket-listed-price').textContent = '$' + userdata.price
     const dayChangeDiv = hoverAlert.querySelector('.ideamarket-listed-day-change');
-    dayChangeDiv.textContent = userdata.dayChange
     if(userdata.dayChange[0] === '-') {
       dayChangeDiv.classList.add('text-brand-red')
       dayChangeDiv.classList.add('dark:text-red-500')
+      dayChangeDiv.textContent = userdata.dayChange
     } else {
       dayChangeDiv.classList.add('text-brand-green')
+      dayChangeDiv.textContent = '+' + userdata.dayChange
     }
-    (hoverAlert.querySelector('.ideamarket-listed-button').parentNode as Element).setAttribute('href', `https://ideamarket.com/i/${userdata.market}/${username}`)
+    (hoverAlert.querySelector('.ideamarket-listed-button').parentNode as Element).setAttribute('href', `https://ideamarket.io/i/${userdata.market}/${username.substr(1)}`)
   } else {
     hoverAlert.classList.add('unlisted')
   }

@@ -81,7 +81,7 @@ const Popup: React.FC = () => {
         />
       </div>
       <div className="ml-3 text-brand-new-dark font-semibold">
-        Actived For:
+        Activated For:
       </div>
       <div className="m-3 mt-2 text-sm">
         <div className="mr-2 mb-2">
