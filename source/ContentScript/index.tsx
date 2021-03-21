@@ -9,6 +9,7 @@ import {
   setThemeWithSelection
 } from "../helpers/events";
 import getIdeaMarketData from "../helpers/api"
+import { browser } from 'webextension-polyfill-ts';
 
 // Twitter Market
 let allTweets = document.querySelectorAll('div[data-testid="tweet"]');
@@ -35,9 +36,9 @@ const listingsData:Listings = {
 
 init();
 
-function init() {
+async function init() {
   const currentDomain = window.location.host;
-  if(checkIfActivatedDomain(currentDomain)) {
+  if(await checkIfActivatedDomain(currentDomain)) {
     AddIdeaMarketContainerToDom();
     // Twitter
     if (currentDomain.includes('twitter.com')) {
@@ -61,15 +62,20 @@ function init() {
 function detectChangesInTweetsColoumn(){
   const targetNode = document.querySelector('div[data-testid="primaryColumn"] section > div > div');
   DetectChangesOnElement(targetNode, function() {
-    console.log(targetNode)
-    console.log("Changes")
     startIdeaMarketTwitter();
   })
 }
 
-function checkIfActivatedDomain(currentDomain: string) {
-  const domainsActivated = ['twitter.com', 'substack.com']
-  return domainsActivated.find(element => element.includes(currentDomain));
+async function checkIfActivatedDomain(currentDomain: string) {
+  let sitesActivated =  {twitter: true, substack: true}
+  const item = await browser.storage.local.get("sitesActivated");
+  if(item?.sitesActivated){
+    sitesActivated = JSON.parse(item.sitesActivated);
+  }
+  const siteFound = Object.keys(sitesActivated).find(element => currentDomain.includes(element));
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return sitesActivated[siteFound]
 }
 
 function StartIdeaMarket() {

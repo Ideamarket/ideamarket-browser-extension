@@ -20,34 +20,63 @@ const ideaMarketThemes: IdeaMarketThemesValue[] = [
 ]
 
 let intialSelectedTheme = 'System Default';
-
+let intialSitesActivated = {twitter: true, substack: true};
 
 browser.storage.local.get("theme")
-.then((item) => {
-    intialSelectedTheme = item.theme
+  .then((item) => {
+    if(item?.theme){
+      intialSelectedTheme = item.theme
+    }
+  }, () => {
+    console.log('no theme selected')
+  });
+
+browser.storage.local.get("sitesActivated")
+  .then((item) => {
+    if(item?.sitesActivated){
+      intialSitesActivated = JSON.parse(item.sitesActivated)
+    }
   }, () => {
     console.log('no theme selected')
   });
   
-// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//   // dark mode
-//   console.log("dark mode")
-// }
-// window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-//   const newColorScheme = e.matches ? "dark" : "light";
-//   console.log(newColorScheme)
-// });
-
 const Popup: React.FC = () => {
   const [theme, settheme] = React.useState(intialSelectedTheme)
+  const [formState, setFormState] = React.useState(intialSitesActivated)
   React.useEffect(() => {
     browser.storage.local.get("theme")
       .then((item) => {
-        settheme(item.theme)
+        if(item?.theme){
+          settheme(item.theme)
+        }
       }, () => {
         console.log('no theme selected')
       });
+    browser.storage.local.get("sitesActivated")
+      .then((item) => {
+        console.log(item)
+        if(item?.sitesActivated){
+          setFormState(JSON.parse(item.sitesActivated))
+        }
+      }, () => {
+        console.log('no sitesActivated selected')
+      });
   }, [])
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (e: { target: any; }) => {
+    const newFormState = {
+      ...formState,
+      [e.target.name]: e.target.checked,
+    }
+    browser.storage.local.set({sitesActivated: JSON.stringify(newFormState)})
+      .then(() => {
+        setFormState(newFormState);
+      }, () => {
+        console.log('error')
+      });
+  }
+
   return (
     <section id="popup" className="bg-white dark:bg-black">
       <nav className="w-full shadow bg-top-desktop p-5 text-center">
@@ -55,7 +84,7 @@ const Popup: React.FC = () => {
           return openWebPage('https://ideamarket.io');
         }}>
           <img className="block w-auto h-8" src={icon} alt="Workflow logo"/>
-          <span className="w-auto h-full text-2xl leading-none text-white text-3xl font-gilroy-bold">Ideamarket</span>
+          <span className="w-auto h-full leading-none text-white text-3xl font-gilroy-bold">Ideamarket</span>
         </div>
       </nav>
       <div className="ml-3 mt-5 text-brand-new-dark font-semibold">
@@ -85,13 +114,16 @@ const Popup: React.FC = () => {
       </div>
       <div className="m-3 mt-2 text-sm">
         <div className="mr-2 mb-2">
-          <input type="checkbox" id="ideamarket-twitter" />
+          <input type="checkbox" id="ideamarket-twitter" name="twitter"
+            checked={formState.twitter}
+            onChange={handleChange}/>
           <label htmlFor="ideamarket-twitter" className="ml-2 cursor-pointer text-brand-new-dark font-semibold">
             Twitter
           </label>
         </div>
         <div className="mr-2">
-          <input type="checkbox" id="ideamarket-substack" />
+          <input type="checkbox" name="substack" id="ideamarket-substack" checked={formState.substack}
+            onChange={handleChange}/>
           <label htmlFor="ideamarket-substack" className="ml-2 cursor-pointer text-brand-new-dark font-semibold">
             Substack
           </label>
