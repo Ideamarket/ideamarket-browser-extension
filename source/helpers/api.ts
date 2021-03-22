@@ -1,4 +1,4 @@
-function getIdeaMarketData(allUserNames: string[]){
+function getIdeaMarketData(allUserNames: string[], marketName: string){
   return fetch('https://subgraph.backend.ideamarket.io:8080/subgraphs/name/Ideamarket/Ideamarket', {
     method: 'POST',
     headers: {
@@ -8,7 +8,7 @@ function getIdeaMarketData(allUserNames: string[]){
     body: JSON.stringify({
       query: `
       {
-        ideaMarkets(where:{name:"Twitter"}) {
+        ideaMarkets(where:{name:"${marketName}"}) {
           tokens(where:{name_in:${JSON.stringify(allUserNames.filter((v, i, a) => a.indexOf(v) === i))}}) {
             id
             name

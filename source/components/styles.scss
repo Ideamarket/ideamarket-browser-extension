@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 @import "../styles/fonts";
 
+.publication-content {
+    position: relative;
+}
+
 #ideamarket-container {
     position: absolute;
     font-family: sans-serif;
