@@ -7,7 +7,7 @@ import './styles.scss'
 const Container: React.FC = () => {
   return (
     <div>
-      <div className="ideamarket-hover-alert fixed  block text-center overflow-auto bg-extension-light-2 dark:bg-extension-dark-2 text-black dark:text-white">
+      <div className="fixed block overflow-auto text-center text-black ideamarket-hover-alert bg-extension-light-2 dark:bg-extension-dark-2 dark:text-white">
         <div className="ideamarket-unlisted-container">
           Unlisted
         </div>
@@ -23,19 +23,19 @@ const Container: React.FC = () => {
         </div>
         <div className="ideamarket-alert-bottom bg-extension-light-1 dark:bg-extension-dark-1">
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="ideamarket-button ideamarket-unlisted-button rounded-lg text-white border-none cursor-pointer font-bold">List</button>
+            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-unlisted-button">List</button>
           </a>
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="ideamarket-button ideamarket-listed-button rounded-lg text-white border-none cursor-pointer font-bold">Buy</button>
+            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-listed-button">Buy</button>
           </a>
-          <div className="ideamarket-powered-by-text font-bold">Powered by <span className="text-black dark:text-white">Ideamarket</span></div>
+          <div className="font-bold ideamarket-powered-by-text">Powered by <span className="text-black dark:text-white">Ideamarket</span></div>
         </div>
       </div>
-      <div className="ideamarket-listing flex justify-center absolute cursor-pointer items-center">
+      <div className="absolute flex items-center justify-center cursor-pointer ideamarket-listing">
         <span className="ideamarket-rank"></span>
         <img className="logo listed-logo" src={icon}/>
-        <img className="logo unlisted-logo" src={disabledLogo}/>
-        <img className="logo loading-icon" src={loadingicon}/>
+        <img className="opacity-50 logo unlisted-logo" src={disabledLogo}/>
+        <img className="opacity-50 logo loading-icon" src={loadingicon}/>
       </div>
     </div>
   );
