@@ -13,7 +13,7 @@
 	"homepage_url": "https://ideamarket.io/",
 	"short_name": "Ideamarket",
 
-	"permissions": ["activeTab", "storage", "http://*/*", "https://*/*"],
+	"permissions": ["activeTab", "storage", "https://twitter.com/*", "https://*.substack.com/*"],
 
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 
@@ -58,7 +58,7 @@
 
 	"content_scripts": [
 		{
-			"matches": ["http://*/*", "https://*/*"],
+			"matches": ["https://twitter.com/*", "https://*.substack.com/*"],
 			"js": ["js/contentScript.bundle.js"],
 			"css": ["css/contentScript.css"]
 		}
