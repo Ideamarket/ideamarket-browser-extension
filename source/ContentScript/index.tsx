@@ -119,7 +119,7 @@ async function getDataForAllPublicationsOnScreen(onSuccess: { (): void; (): void
   const allPublications = document.querySelectorAll('.publications a.publication, .search-results .item');
   const allUserNames: string[] = []
   allPublications.forEach(publication => {
-    const username = publication.getAttribute("href")?.split(".")[0]?.replace(/^https?:\/\//,'') || publication.querySelector('.title a').getAttribute("href").split(".")[0].replace(/^https?:\/\//,'');
+    const username = (publication.getAttribute("href")?.split(".")[0]?.replace(/^https?:\/\//,'') || publication.querySelector('.title a').getAttribute("href").split(".")[0].replace(/^https?:\/\//,'')).toLowerCase();
     allUserNames.push(username)
   });
   getIdeaMarketData(allUserNames, 'Substack').then((data) => {
@@ -138,7 +138,7 @@ async function getDataForAllTweetsOnScreen(onSuccess: { (): void; (): void; }) {
   const allTweets = document.querySelectorAll('div[data-testid="tweet"]');
   const allUserNames: string[] = []
   allTweets.forEach(tweet => {
-    const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
+    const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent.toLowerCase();
     allUserNames.push(username)
   });
   getIdeaMarketData(allUserNames, 'Twitter').then((data) => {
@@ -177,7 +177,7 @@ function addDataToListingsData(allUserNames: string[], tokens: any[]) {
 function addToTweetsOnScreen() {
   const allTweets = document.querySelectorAll('div[data-testid="tweet"]');
   allTweets.forEach(tweet => {
-    const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent;
+    const username = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type').textContent.toLowerCase();
     AddIdeaMarket(tweet.parentNode, username, tweet.querySelector('div[data-testid="caret"]').parentNode);
   });
 }
@@ -185,7 +185,7 @@ function addToTweetsOnScreen() {
 function addToSubstacksOnScreen(){
   const allpublications = document.querySelectorAll('.publications a.publication, .search-results .item');
   allpublications.forEach(publication => {
-    const username = publication.getAttribute("href")?.split(".")[0]?.replace(/^https?:\/\//,'') || publication.querySelector('.title a').getAttribute("href").split(".")[0].replace(/^https?:\/\//,'');
+    const username = (publication.getAttribute("href")?.split(".")[0]?.replace(/^https?:\/\//,'') || publication.querySelector('.title a').getAttribute("href").split(".")[0].replace(/^https?:\/\//,'')).toLowerCase();
     AddIdeaMarket(publication, username, publication.querySelector('.publication-content') || publication);
   });
 }
