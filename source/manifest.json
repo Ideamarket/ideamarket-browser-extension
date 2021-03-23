@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Ideamarket browser extension",
+  "name": "Ideamarket",
   "version": "1.0.0",
 
   "icons": {
@@ -22,9 +22,9 @@
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
-  "__chrome|firefox__author": "ideamarket",
+  "__chrome|firefox__author": "Ideamarket",
   "__opera__developer": {
-    "name": "ideamarket"
+    "name": "Ideamarket"
   },
 
   "__firefox__applications": {
