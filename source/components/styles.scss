@@ -24,8 +24,11 @@
 	font-family: sans-serif;
 	right: 25px;
 	top: -5px;
-	.logo {
+	.listed-logo, .loading-icon {
 		width: 30px;
+	}
+	.unlisted-logo {
+		width: 22px;
 	}
 	.ideamarket-rank {
 		color: grey;

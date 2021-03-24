@@ -38,8 +38,8 @@ const Container: React.FC = () => {
 			<div className="absolute flex items-center justify-center cursor-pointer ideamarket-listing">
 				<span className="ideamarket-rank"></span>
 				<img className="logo listed-logo" src={icon} />
-				<img className="opacity-50 logo unlisted-logo" src={disabledLogo} />
-				<img className="opacity-50 logo loading-icon" src={loadingicon} />
+				<img className="pt-1 opacity-50 logo unlisted-logo" src={disabledLogo} />
+				<img className="pt-1 opacity-50 logo loading-icon" src={loadingicon} />
 			</div>
 		</div>
 	)
