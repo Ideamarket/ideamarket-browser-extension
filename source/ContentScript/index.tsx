@@ -237,15 +237,38 @@ function addToSubstacksOnScreen() {
 	})
 }
 
+const timeouts: {[key: string]: NodeJS.Timeout} = {};
+
+function onMouseEnter(event: MouseEvent, username: string) {
+	const timeout = timeouts[username]
+	if (timeout != null) {
+		clearTimeout(timeout)
+	}
+
+	timeouts[username] = setTimeout(function () {
+		showAlert(event, username)
+	}, 350);
+}
+
+function onMouseLeave(username: string) {
+	const timeout = timeouts[username]
+	if (timeout != null) {
+		clearTimeout(timeout)
+		timeouts[username] = null
+	}
+}
+
 function AddIdeaMarket(tweet: Node & ParentNode, username: string, target: Node & ParentNode) {
 	const el = document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement
 	if (Object.prototype.hasOwnProperty.call(listingsData, username) && listingsData[username].rank) {
 		el.classList.add('listed')
 		el.querySelector('.ideamarket-rank').textContent = listingsData[username].rank
-		el.addEventListener('mouseover', (e) => showAlert(e, username), false)
+		el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
+		el.addEventListener('mouseleave', () => onMouseLeave(username), false)
 	} else if (listingsData[username]?.notList) {
 		el.classList.add('unlisted')
-		el.addEventListener('mouseover', (e) => showAlert(e, username), false)
+		el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
+		el.addEventListener('mouseleave', () => onMouseLeave(username), false)
 	} else {
 		el.classList.add('loading')
 	}
