@@ -1,5 +1,5 @@
 function getIdeaMarketData(allUserNames: string[], marketName: string) {
-	return fetch('https://subgraph.backend.ideamarket.io:8080/subgraphs/name/Ideamarket/Ideamarket', {
+	return fetch('https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
