@@ -237,7 +237,7 @@ function addToSubstacksOnScreen() {
 	})
 }
 
-const timeouts: {[key: string]: NodeJS.Timeout} = {};
+const timeouts: { [key: string]: NodeJS.Timeout } = {}
 
 function onMouseEnter(event: MouseEvent, username: string) {
 	const timeout = timeouts[username]
@@ -247,7 +247,7 @@ function onMouseEnter(event: MouseEvent, username: string) {
 
 	timeouts[username] = setTimeout(function () {
 		showAlert(event, username)
-	}, 350);
+	}, 350)
 }
 
 function onMouseLeave(username: string) {
