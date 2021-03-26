@@ -24,30 +24,29 @@
 	font-family: sans-serif;
 	right: 25px;
 	top: -5px;
-	.listed-logo,
-	.loading-icon {
+	.ideamarket-listed-logo, .ideamarket-loading-icon {
 		width: 30px;
 	}
-	.unlisted-logo {
+	.ideamarket-unlisted-logo {
 		width: 22px;
 	}
 	.ideamarket-rank {
 		color: grey;
 	}
-	&.listed {
-		.unlisted-logo,
-		.loading-icon {
+	&.ideamarket-listed {
+		.ideamarket-unlisted-logo,
+		.ideamarket-loading-icon {
 			display: none;
 		}
 	}
-	&.unlisted {
-		.listed-logo,
-		.loading-icon {
+	&.ideamarket-unlisted {
+		.ideamarket-listed-logo,
+		.ideamarket-loading-icon {
 			display: none;
 		}
 	}
-	&.loading {
-		.loading-icon {
+	&.ideamarket-loading {
+		.ideamarket-loading-icon {
 			@-moz-keyframes spin {
 				100% {
 					-moz-transform: rotate(360deg);
@@ -71,8 +70,8 @@
 			margin-top: 5px;
 			margin-right: 5px;
 		}
-		.listed-logo,
-		.unlisted-logo {
+		.ideamarket-listed-logo,
+		.ideamarket-unlisted-logo {
 			display: none;
 		}
 	}
@@ -127,14 +126,14 @@
 		letter-spacing: -0.5px;
 	}
 
-	&.listed {
+	&.ideamarket-listed {
 		.ideamarket-unlisted-container,
 		.ideamarket-unlisted-button {
 			display: none;
 		}
 	}
 
-	&.unlisted {
+	&.ideamarket-unlisted {
 		.ideamarket-listed-container,
 		.ideamarket-listed-button {
 			display: none;

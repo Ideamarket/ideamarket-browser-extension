@@ -176,16 +176,19 @@ async function getDataForAllTweetsOnScreen(onSuccess: { (): void; (): void }) {
 			.textContent.toLowerCase()
 		allUserNames.push(username)
 	})
-	getIdeaMarketData(allUserNames, 'Twitter').then((data) => {
-		if (data?.data?.ideaMarkets[0]?.tokens) {
-			const { tokens } = data.data.ideaMarkets[0]
-			addDataToListingsData(allUserNames, tokens)
-			onSuccess()
-		} else {
-			// If api error try again
-			getDataForAllTweetsOnScreen(onSuccess)
-		}
-	})
+	getIdeaMarketData(allUserNames, 'Twitter')
+		.then((data) => {
+			if (data?.data?.ideaMarkets[0]?.tokens) {
+				const { tokens } = data.data.ideaMarkets[0]
+				addDataToListingsData(allUserNames, tokens)
+				onSuccess()
+			} else {
+				// If api error try again after three seconds
+				setTimeout(() => {
+					getDataForAllTweetsOnScreen(onSuccess)
+				}, 3000)
+			}
+		})
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -261,16 +264,16 @@ function onMouseLeave(username: string) {
 function AddIdeaMarket(tweet: Node & ParentNode, username: string, target: Node & ParentNode) {
 	const el = document.querySelector('#ideamarket-container .ideamarket-listing').cloneNode(true) as HTMLElement
 	if (Object.prototype.hasOwnProperty.call(listingsData, username) && listingsData[username].rank) {
-		el.classList.add('listed')
+		el.classList.add('ideamarket-listed')
 		el.querySelector('.ideamarket-rank').textContent = listingsData[username].rank
 		el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
 		el.addEventListener('mouseleave', () => onMouseLeave(username), false)
 	} else if (listingsData[username]?.notList) {
-		el.classList.add('unlisted')
+		el.classList.add('ideamarket-unlisted')
 		el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
 		el.addEventListener('mouseleave', () => onMouseLeave(username), false)
 	} else {
-		el.classList.add('loading')
+		el.classList.add('ideamarket-loading')
 	}
 	if (tweet.querySelector('.ideamarket-listing')) {
 		tweet.querySelector('.ideamarket-listing').replaceWith(el)
@@ -294,7 +297,7 @@ function showAlert(event: MouseEvent, username: string) {
 function AddDataInAlertBox(hoverAlert: HTMLElement, username: string) {
 	const userdata = listingsData[username]
 	if (userdata?.rank) {
-		hoverAlert.classList.add('listed')
+		hoverAlert.classList.add('ideamarket-listed')
 		hoverAlert.querySelector('.ideamarket-listed-rank').textContent = userdata.rank
 		hoverAlert.querySelector('.ideamarket-listed-price').textContent = '$' + userdata.price
 		const dayChangeDiv = hoverAlert.querySelector('.ideamarket-listed-day-change')
@@ -311,7 +314,7 @@ function AddDataInAlertBox(hoverAlert: HTMLElement, username: string) {
 			`https://ideamarket.io/i/${userdata.market}/${username.indexOf('@') === 0 ? username.substr(1) : username}`
 		)
 	} else {
-		hoverAlert.classList.add('unlisted')
+		hoverAlert.classList.add('ideamarket-unlisted')
 	}
 }
 
