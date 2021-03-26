@@ -37,9 +37,9 @@ const Container: React.FC = () => {
 			</div>
 			<div className="absolute flex items-center justify-center cursor-pointer ideamarket-listing">
 				<span className="ideamarket-rank"></span>
-				<img className="logo listed-logo" src={icon} />
-				<img className="pt-1 opacity-50 logo unlisted-logo" src={disabledLogo} />
-				<img className="pt-1 opacity-50 logo loading-icon" src={loadingicon} />
+				<img className="logo listed-logo max-w-max" src={icon} />
+				<img className="pt-1 opacity-50 logo unlisted-logo max-w-max" src={disabledLogo} />
+				<img className="pt-1 opacity-50 logo loading-icon max-w-max" src={loadingicon} />
 			</div>
 		</div>
 	)
