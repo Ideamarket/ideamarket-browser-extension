@@ -21,17 +21,14 @@
 }
 
 .ideamarket-listing {
-	font-family: sans-serif;
+	font-family: 'Inter-Regular', sans-serif;
 	right: 25px;
-	top: -5px;
+	top: -3px;
 	.ideamarket-listed-logo, .ideamarket-loading-icon {
-		width: 30px;
+		width: 22px;
 	}
 	.ideamarket-unlisted-logo {
 		width: 22px;
-	}
-	.ideamarket-rank {
-		color: grey;
 	}
 	&.ideamarket-listed {
 		.ideamarket-unlisted-logo,

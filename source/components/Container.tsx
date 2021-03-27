@@ -35,11 +35,11 @@ const Container: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<div className="absolute flex items-center justify-center cursor-pointer ideamarket-listing">
-				<span className="ideamarket-rank"></span>
+			<div className="pt-1 absolute flex items-center justify-center cursor-pointer ideamarket-listing">
+				<span className="ideamarket-rank text-xs text-black"></span>
 				<img className="ideamarket-listed-logo max-w-max" src={icon} />
-				<img className="pt-1 opacity-50 ideamarket-unlisted-logo max-w-max" src={disabledLogo} />
-				<img className="pt-1 opacity-50 ideamarket-loading-icon max-w-max" src={loadingicon} />
+				<img className="opacity-50 ideamarket-unlisted-logo max-w-max" src={disabledLogo} />
+				<img className="opacity-50 ideamarket-loading-icon max-w-max" src={loadingicon} />
 			</div>
 		</div>
 	)
