@@ -9,7 +9,7 @@
 		"48": "assets/icons/logo.png",
 		"128": "assets/icons/logo.png"
 	},
-	"description": "Ideamarket browser extension helps displaying ranks in twitter substack etc.",
+	"description": "Display market rankings from Ideamarket.io subtly in everyday web browsing.",
 	"homepage_url": "https://ideamarket.io/",
 	"short_name": "Ideamarket",
 
