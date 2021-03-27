@@ -13,7 +13,7 @@
 	"homepage_url": "https://ideamarket.io/",
 	"short_name": "Ideamarket",
 
-	"permissions": ["activeTab", "storage", "https://twitter.com/*", "https://*.substack.com/*"],
+	"permissions": ["activeTab", "storage", "https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket"],
 
 	"content_security_policy": "script-src 'self'; object-src 'self'",
 
