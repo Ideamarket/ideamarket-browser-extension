@@ -4,10 +4,13 @@
 	"version": "1.0.0",
 
 	"icons": {
-		"16": "assets/icons/logo.png",
-		"32": "assets/icons/logo.png",
-		"48": "assets/icons/logo.png",
-		"128": "assets/icons/logo.png"
+		"16": "assets/icons/sizes/logo-icon-16x16.png",
+		"32": "assets/icons/sizes/logo-icon-32x32.png",
+		"48": "assets/icons/sizes/logo-icon-48x48.png",
+		"96": "assets/icons/sizes/logo-icon-96x96.png",
+		"120": "assets/icons/sizes/logo-icon-120x120.png",
+		"144": "assets/icons/sizes/logo-icon-144x144.png",
+		"310": "assets/icons/sizes/logo-icon-310x310.png"
 	},
 	"description": "Display market rankings from Ideamarket.io subtly in everyday web browsing.",
 	"homepage_url": "https://ideamarket.io/",
@@ -34,10 +37,13 @@
 	"browser_action": {
 		"default_popup": "popup.html",
 		"default_icon": {
-			"16": "assets/icons/logo.png",
-			"32": "assets/icons/logo.png",
-			"48": "assets/icons/logo.png",
-			"128": "assets/icons/logo.png"
+			"16": "assets/icons/sizes/logo-icon-16x16.png",
+			"32": "assets/icons/sizes/logo-icon-32x32.png",
+			"48": "assets/icons/sizes/logo-icon-48x48.png",
+			"96": "assets/icons/sizes/logo-icon-96x96.png",
+			"120": "assets/icons/sizes/logo-icon-120x120.png",
+			"144": "assets/icons/sizes/logo-icon-144x144.png",
+			"310": "assets/icons/sizes/logo-icon-310x310.png"
 		},
 		"default_title": "Ideamarket",
 		"__chrome|opera__chrome_style": false,

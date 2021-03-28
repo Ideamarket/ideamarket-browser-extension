@@ -89,7 +89,7 @@ const Popup: React.FC = () => {
 
 	return (
 		<section id="popup" className="bg-white dark:bg-black">
-			<nav className="w-full shadow bg-top-desktop p-5 text-center">
+			<nav className="w-full shadow bg-top-desktop pt-5 pb-5 text-center">
 				<div
 					className="flex justify-center cursor-pointer"
 					onClick={(): Promise<Tabs.Tab> => {
