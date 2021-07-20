@@ -1,7 +1,7 @@
 import * as React from 'react'
-import icon from '../assets/icons/logo.png'
-import loadingicon from '../assets/icons/loading.svg'
-import disabledLogo from '../assets/icons/disabledLogo.png'
+import icon from '../../assets/icons/logo.png'
+import loadingicon from '../../assets/icons/loading.svg'
+import disabledLogo from '../../assets/icons/disabledLogo.png'
 import './styles.scss'
 
 const Container: React.FC = () => {

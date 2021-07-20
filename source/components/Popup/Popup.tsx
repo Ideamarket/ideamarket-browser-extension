@@ -1,48 +1,14 @@
 import * as React from 'react'
-import { browser, Tabs } from 'webextension-polyfill-ts'
-import icon from '../assets/icons/logo.png'
+import { browser } from 'webextension-polyfill-ts'
+import icon from '../../assets/icons/logo.png'
 import './styles.scss'
 import Select from 'react-select'
-
-function openWebPage(url: string): Promise<Tabs.Tab> {
-  return browser.tabs.create({ url })
-}
-
-type IdeaMarketThemesValue = {
-  value: string
-  label: string
-}
-
-const ideaMarketThemes: IdeaMarketThemesValue[] = [
-  { value: 'System Default', label: 'System Default' },
-  { value: 'Light', label: 'Light' },
-  { value: 'Dark', label: 'Dark' },
-]
-
-let intialSelectedTheme = 'System Default'
-let intialSitesActivated = { twitter: true, substack: true }
-
-browser.storage.local.get('theme').then(
-  (item) => {
-    if (item?.theme) {
-      intialSelectedTheme = item.theme
-    }
-  },
-  () => {
-    console.log('no theme selected')
-  }
-)
-
-browser.storage.local.get('sitesActivated').then(
-  (item) => {
-    if (item?.sitesActivated) {
-      intialSitesActivated = JSON.parse(item.sitesActivated)
-    }
-  },
-  () => {
-    console.log('no theme selected')
-  }
-)
+import { openWebPage } from '../../helpers'
+import {
+  ideaMarketThemes,
+  intialSelectedTheme,
+  intialSitesActivated,
+} from '../../helpers/theme'
 
 const Popup: React.FC = () => {
   const [theme, settheme] = React.useState(intialSelectedTheme)
@@ -94,9 +60,7 @@ const Popup: React.FC = () => {
       <nav className="w-full shadow bg-top-desktop pt-5 pb-5 text-center">
         <div
           className="flex justify-center cursor-pointer"
-          onClick={(): Promise<Tabs.Tab> => {
-            return openWebPage('https://ideamarket.io')
-          }}
+          onClick={() => openWebPage('https://ideamarket.io')}
         >
           <img className="block w-auto h-8" src={icon} alt="Workflow logo" />
           <span className="w-auto h-full leading-none text-white text-3xl font-gilroy-bold">
