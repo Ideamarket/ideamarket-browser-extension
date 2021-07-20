@@ -1,15 +1,19 @@
 function getIdeaMarketData(allUserNames: string[], marketName: string) {
-	return fetch('https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		cache: 'force-cache',
-		body: JSON.stringify({
-			query: `
+  return fetch(
+    'https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'force-cache',
+      body: JSON.stringify({
+        query: `
       {
         ideaMarkets(where:{name:"${marketName}"}) {
-          tokens(where:{name_in:${JSON.stringify(allUserNames.filter((v, i, a) => a.indexOf(v) === i))}}) {
+          tokens(where:{name_in:${JSON.stringify(
+            allUserNames.filter((v, i, a) => a.indexOf(v) === i)
+          )}}) {
             id
             name
             rank
@@ -23,10 +27,11 @@ function getIdeaMarketData(allUserNames: string[], marketName: string) {
           }
         }
       }`,
-		}),
-	})
-		.then((res) => res.json())
-		.catch((err) => err)
+      }),
+    }
+  )
+    .then((res) => res.json())
+    .catch((err) => err)
 }
 
 export default getIdeaMarketData
