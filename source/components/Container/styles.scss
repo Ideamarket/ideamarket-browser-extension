@@ -19,6 +19,35 @@
   }
 }
 
+.ideamarket-profile-substack {
+  width: 40px;
+  display: flex;
+  position: inherit;
+  margin-left: 16px;
+}
+
+.ideamarket-profile-twitter {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  width: 40px;
+  display: flex;
+  position: inherit;
+  margin-left: 32px;
+
+  span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  img.ideamarket-listed-logo {
+    display: none !important;
+  }
+
+  img.ideamarket-unlisted-logo {
+    display: block !important;
+  }
+}
+
 .ideamarket-listing {
   font-family: 'Inter-Regular', sans-serif;
   right: 25px;

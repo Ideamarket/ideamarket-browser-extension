@@ -1,9 +1,23 @@
 import getIdeaMarketData from '../helpers/api'
-import { addDataToListingsData, addIdeaMarket } from './utils'
+import { addIdeaMarket } from './ideaMarket'
+import { addDataToListingsData } from './utils'
+
+const getSubstackUsernameFromUrl = () =>
+  window.location.host.split('.')[0]?.replace(/^https?:\/\//, '')
+
+const onCallback = () => {
+  const username = getSubstackUsernameFromUrl()
+  addIdeaMarket(
+    document.querySelector('.headline'),
+    username,
+    document.querySelector('.headline'),
+    'substack'
+  )
+}
 
 export function startIdeaMarketSubStack() {
   // Get Data for tweets on screen
-  getDataForAllPublicationsOnScreen(addToSubstacksOnScreen)
+  getDataForAllPublicationsOnScreen(onCallback)
   // Add IdeaMarket to available Tweets
   addToSubstacksOnScreen()
 }
@@ -40,7 +54,10 @@ const getDataForAllPublicationsOnScreen = (onSuccess: {
   const allPublications = document.querySelectorAll(
     '.publications a.publication, .search-results .item'
   )
+  const username = getSubstackUsernameFromUrl()
+
   const allUserNames: string[] = []
+  allUserNames.push(username)
   allPublications.forEach((publication) => {
     const username = (
       publication
@@ -57,6 +74,7 @@ const getDataForAllPublicationsOnScreen = (onSuccess: {
   })
 
   getIdeaMarketData(allUserNames, 'Substack').then((data: any) => {
+    console.log(allUserNames, data)
     if (data?.data?.ideaMarkets[0]?.tokens) {
       const { tokens } = data.data.ideaMarkets[0]
       addDataToListingsData(allUserNames, tokens)

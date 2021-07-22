@@ -1,11 +1,30 @@
 import getIdeaMarketData from '../helpers/api'
-import { addDataToListingsData, addIdeaMarket } from './utils'
+import { addIdeaMarket } from './ideaMarket'
+import { addDataToListingsData } from './utils'
 
 export const startIdeaMarketTwitter = () => {
   // Get Data for tweets on screen
-  getDataForAllTweetsOnScreen(addToTweetsOnScreen)
+
+  const addToTweetAndProfile = () => {
+    addToTweetsOnScreen()
+    addIdeaMarketToProfile()
+  }
+  getDataForAllTweetsOnScreen(addToTweetAndProfile)
   // Add IdeaMarket to available Tweets
   addToTweetsOnScreen()
+}
+
+const usernameXPath =
+  'div[data-testid="primaryColumn"] div > div:nth-child(2) > div > div> div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) span'
+const followinSectionXPath =
+  'div[data-testid="primaryColumn"] div > div:nth-child(2) > div > div> div > div:nth-child(2) > div:nth-child(5)'
+
+const addIdeaMarketToProfile = () => {
+  const usernameNode = document.querySelector(usernameXPath)
+  const username = usernameNode.textContent.toLowerCase()
+  const followingSectionNode = document.querySelector(followinSectionXPath)
+
+  addIdeaMarket(followingSectionNode, username, followingSectionNode, 'twitter')
 }
 
 export const addToTweetsOnScreen = () => {
@@ -25,7 +44,14 @@ export const addToTweetsOnScreen = () => {
 
 const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
   const allTweets = document.querySelectorAll('div[data-testid="tweet"]')
+
+  const usernameNode = document.querySelector(usernameXPath)
+
   const allUserNames: string[] = []
+
+  if (usernameNode?.textContent.toLowerCase()) {
+    allUserNames.push(usernameNode.textContent.toLowerCase())
+  }
 
   allTweets.forEach((tweet) => {
     const username = tweet
@@ -35,9 +61,11 @@ const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
   })
 
   getIdeaMarketData(allUserNames, 'Twitter').then((data: any) => {
+    console.log(data, allUserNames)
     if (data?.data?.ideaMarkets[0]?.tokens) {
       const { tokens } = data.data.ideaMarkets[0]
       addDataToListingsData(allUserNames, tokens)
+
       onSuccess()
     } else {
       // If api error try again after three seconds

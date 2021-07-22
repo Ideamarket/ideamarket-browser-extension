@@ -37,7 +37,7 @@ const Container: React.FC = () => {
         </div>
       </div>
       <div className="absolute flex items-center justify-center pt-1 cursor-pointer ideamarket-listing">
-        <span className="text-xs text-black ideamarket-rank"></span>
+        <span className="text-xs text-black ideamarket-price dark:text-white">$0.10</span>
         <img className="ideamarket-listed-logo max-w-max" src={icon} />
         <img
           className="opacity-50 ideamarket-unlisted-logo max-w-max"

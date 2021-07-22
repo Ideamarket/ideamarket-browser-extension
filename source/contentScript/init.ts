@@ -30,6 +30,15 @@ const initOnSubstack = () => {
     1000,
     100000
   )
+
+  waitForElementToDisplay(
+    '.container > a.headline',
+    () => {
+      startIdeaMarket()
+    },
+    1000,
+    100000
+  )
   waitForElementToDisplay(
     '.search-results',
     () => {

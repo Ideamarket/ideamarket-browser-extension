@@ -1,39 +1,8 @@
 import { listingsData } from './index'
 
-export function addIdeaMarket(
-  tweet: Node & ParentNode,
-  username: string,
-  target: Node & ParentNode
-) {
-  const el = document
-    .querySelector('#ideamarket-container .ideamarket-listing')
-    .cloneNode(true) as HTMLElement
-  if (
-    Object.prototype.hasOwnProperty.call(listingsData, username) &&
-    listingsData[username].rank
-  ) {
-    el.classList.add('ideamarket-listed')
-    el.querySelector('.ideamarket-rank').textContent =
-      listingsData[username].rank
-    el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
-    el.addEventListener('mouseleave', () => onMouseLeave(username), false)
-  } else if (listingsData[username]?.notList) {
-    el.classList.add('ideamarket-unlisted')
-    el.addEventListener('mouseenter', (e) => onMouseEnter(e, username), false)
-    el.addEventListener('mouseleave', () => onMouseLeave(username), false)
-  } else {
-    el.classList.add('ideamarket-loading')
-  }
-  if (tweet.querySelector('.ideamarket-listing')) {
-    tweet.querySelector('.ideamarket-listing').replaceWith(el)
-  } else {
-    target.appendChild(el)
-  }
-}
-
 const timeouts: { [key: string]: NodeJS.Timeout } = {}
 
-function onMouseEnter(event: MouseEvent, username: string) {
+export function onMouseEnter(event: MouseEvent, username: string) {
   const timeout = timeouts[username]
   if (timeout != null) {
     clearTimeout(timeout)
@@ -44,7 +13,7 @@ function onMouseEnter(event: MouseEvent, username: string) {
   }, 350)
 }
 
-function onMouseLeave(username: string) {
+export function onMouseLeave(username: string) {
   const timeout = timeouts[username]
   if (timeout != null) {
     clearTimeout(timeout)
