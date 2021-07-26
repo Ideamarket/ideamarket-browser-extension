@@ -21,10 +21,18 @@ const followinSectionXPath =
 
 const addIdeaMarketToProfile = () => {
   const usernameNode = document.querySelector(usernameXPath)
-  const username = usernameNode.textContent.toLowerCase()
-  const followingSectionNode = document.querySelector(followinSectionXPath)
 
-  addIdeaMarket(followingSectionNode, username, followingSectionNode, 'twitter')
+  if (usernameNode?.textContent.toLowerCase()) {
+    const username = usernameNode?.textContent.toLowerCase()
+    const followingSectionNode = document.querySelector(followinSectionXPath)
+
+    addIdeaMarket(
+      followingSectionNode,
+      username,
+      followingSectionNode,
+      'twitter'
+    )
+  }
 }
 
 export const addToTweetsOnScreen = () => {
@@ -61,7 +69,6 @@ const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
   })
 
   getIdeaMarketData(allUserNames, 'Twitter').then((data: any) => {
-    console.log(data, allUserNames)
     if (data?.data?.ideaMarkets[0]?.tokens) {
       const { tokens } = data.data.ideaMarkets[0]
       addDataToListingsData(allUserNames, tokens)

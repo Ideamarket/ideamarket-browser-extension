@@ -74,7 +74,6 @@ const getDataForAllPublicationsOnScreen = (onSuccess: {
   })
 
   getIdeaMarketData(allUserNames, 'Substack').then((data: any) => {
-    console.log(allUserNames, data)
     if (data?.data?.ideaMarkets[0]?.tokens) {
       const { tokens } = data.data.ideaMarkets[0]
       addDataToListingsData(allUserNames, tokens)
