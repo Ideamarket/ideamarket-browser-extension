@@ -43,9 +43,9 @@ export const addToTweetsOnScreen = () => {
       .querySelector(':scope > div:last-of-type a > div > div:last-of-type')
       .textContent.toLowerCase()
     addIdeaMarket(
-      tweet.parentNode,
+      tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)'),
       username,
-      tweet.querySelector('div[data-testid="caret"]').parentNode
+      tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)')
     )
   })
 }
