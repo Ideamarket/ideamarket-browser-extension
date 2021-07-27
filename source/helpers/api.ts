@@ -1,32 +1,40 @@
+const BASE_URL = 'https://subgraph.backend.ideamarket.io'
+
 function getIdeaMarketData(allUserNames: string[], marketName: string) {
-	return fetch('https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		cache: 'force-cache',
-		body: JSON.stringify({
-			query: `
-      {
-        ideaMarkets(where:{name:"${marketName}"}) {
-          tokens(where:{name_in:${JSON.stringify(allUserNames.filter((v, i, a) => a.indexOf(v) === i))}}) {
-            id
-            name
-            rank
-            dayChange
-            market {
-              name
-            }
-            latestPricePoint{
-              price
-            }
-          }
+  const stringifiedNames = JSON.stringify(
+    allUserNames.filter((v, i, a) => a.indexOf(v) === i)
+  )
+
+  const query = `
+  {
+    ideaMarkets(where:{name:"${marketName}"}) {
+      tokens(where:{name_in:${stringifiedNames}}) {
+        id
+        name
+        rank
+        dayChange
+        market {
+          name
         }
-      }`,
-		}),
-	})
-		.then((res) => res.json())
-		.catch((err) => err)
+        latestPricePoint{
+          price
+        }
+      }
+    }
+  }`
+
+  return fetch(`${BASE_URL}/subgraphs/name/Ideamarket/Ideamarket`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    cache: 'force-cache',
+    body: JSON.stringify({
+      query,
+    }),
+  })
+    .then((res) => res.json())
+    .catch((err) => err)
 }
 
 export default getIdeaMarketData

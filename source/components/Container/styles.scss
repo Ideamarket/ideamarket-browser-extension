@@ -1,0 +1,169 @@
+// @import "tailwindcss/base";
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import '../../styles/fonts';
+
+.publication-content {
+  position: relative;
+}
+
+#ideamarket-container {
+  position: absolute;
+  display: none;
+}
+
+.discover-page {
+  .ideamarket-listing {
+    top: -2px;
+    right: 0;
+  }
+}
+
+.ideamarket-profile-substack {
+  width: 40px;
+  display: flex;
+  position: inherit;
+  margin-left: 16px;
+}
+
+.ideamarket-profile-twitter {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  width: 40px;
+  right: 0 !important;
+  display: flex;
+  position: inherit;
+  margin-left: 32px;
+
+  span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  img.ideamarket-listed-logo {
+    display: none !important;
+  }
+
+  img.ideamarket-unlisted-logo {
+    display: block !important;
+  }
+}
+
+.ideamarket-listing {
+  font-family: 'Inter-Regular', sans-serif;
+  right: 25px;
+  top: -3px;
+  .ideamarket-listed-logo,
+  .ideamarket-loading-icon {
+    width: 22px;
+  }
+  .ideamarket-unlisted-logo {
+    width: 22px;
+  }
+  &.ideamarket-listed {
+    .ideamarket-unlisted-logo,
+    .ideamarket-loading-icon {
+      display: none;
+    }
+  }
+  &.ideamarket-unlisted {
+    .ideamarket-listed-logo,
+    .ideamarket-loading-icon {
+      display: none;
+    }
+  }
+  &.ideamarket-loading {
+    .ideamarket-loading-icon {
+      @-moz-keyframes spin {
+        100% {
+          -moz-transform: rotate(360deg);
+        }
+      }
+      @-webkit-keyframes spin {
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @keyframes spin {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      -webkit-animation: spin 1.5s linear infinite;
+      -moz-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+      width: 20px !important;
+      margin-top: 5px;
+      margin-right: 5px;
+    }
+    .ideamarket-listed-logo,
+    .ideamarket-unlisted-logo {
+      display: none;
+    }
+  }
+}
+
+.ideamarket-hover-alert {
+  font-family: sans-serif;
+  width: 180px;
+  border: 2px solid rgba(112, 128, 144, 0.4);
+  border-radius: 10px;
+  z-index: 4 !important;
+  top: 5px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+
+  .ideamarket-unlisted-container,
+  .ideamarket-listed-container {
+    font-weight: bold;
+    font-size: 1.4em;
+    border-bottom: 2px solid rgba(112, 128, 144, 0.2);
+  }
+
+  .ideamarket-unlisted-container {
+    padding: 15px;
+  }
+
+  .ideamarket-listed-container {
+    > div {
+      width: calc(50% - 1px);
+      padding: 15px 0;
+      &:first-of-type {
+        border-right: 2px solid rgba(112, 128, 144, 0.2);
+        > div:last-of-type {
+          color: rgb(161, 171, 181);
+        }
+      }
+      > div:last-of-type {
+        font-size: 0.5em;
+      }
+    }
+  }
+
+  .ideamarket-button {
+    padding: 10px 20px;
+    background-color: blue;
+    margin: 10px;
+  }
+
+  .ideamarket-powered-by-text {
+    font-size: 0.7em;
+    padding-bottom: 10px;
+    color: rgb(161, 171, 181);
+    letter-spacing: -0.5px;
+  }
+
+  &.ideamarket-listed {
+    .ideamarket-unlisted-container,
+    .ideamarket-unlisted-button {
+      display: none;
+    }
+  }
+
+  &.ideamarket-unlisted {
+    .ideamarket-listed-container,
+    .ideamarket-listed-button {
+      display: none;
+    }
+  }
+}

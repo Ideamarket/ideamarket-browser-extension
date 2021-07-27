@@ -1,72 +1,75 @@
 {
-	"manifest_version": 2,
-	"name": "Ideamarket",
-	"version": "1.0.0",
+  "manifest_version": 2,
+  "name": "Ideamarket",
+  "version": "1.0.0",
 
-	"icons": {
-		"16": "assets/icons/sizes/logo-icon-16x16.png",
-		"32": "assets/icons/sizes/logo-icon-32x32.png",
-		"48": "assets/icons/sizes/logo-icon-48x48.png",
-		"96": "assets/icons/sizes/logo-icon-96x96.png",
-		"120": "assets/icons/sizes/logo-icon-120x120.png",
-		"144": "assets/icons/sizes/logo-icon-144x144.png",
-		"310": "assets/icons/sizes/logo-icon-310x310.png"
-	},
-	"description": "Display market rankings from Ideamarket.io subtly in everyday web browsing.",
-	"homepage_url": "https://ideamarket.io/",
-	"short_name": "Ideamarket",
+  "icons": {
+    "16": "assets/icons/sizes/logo-icon-16x16.png",
+    "32": "assets/icons/sizes/logo-icon-32x32.png",
+    "48": "assets/icons/sizes/logo-icon-48x48.png",
+    "96": "assets/icons/sizes/logo-icon-96x96.png",
+    "120": "assets/icons/sizes/logo-icon-120x120.png",
+    "144": "assets/icons/sizes/logo-icon-144x144.png",
+    "310": "assets/icons/sizes/logo-icon-310x310.png"
+  },
+  "description": "Display market rankings from Ideamarket.io subtly in everyday web browsing.",
+  "homepage_url": "https://ideamarket.io/",
+  "short_name": "Ideamarket",
 
-	"permissions": ["storage", "https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket"],
+  "permissions": [
+    "storage",
+    "https://subgraph.backend.ideamarket.io/subgraphs/name/Ideamarket/Ideamarket"
+  ],
 
-	"content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
 
-	"__chrome|firefox__author": "Ideamarket",
-	"__opera__developer": {
-		"name": "Ideamarket"
-	},
+  "__chrome|firefox__author": "Ideamarket",
+  "__opera__developer": {
+    "name": "Ideamarket"
+  },
 
-	"__firefox__applications": {
-		"gecko": {
-			"id": "{E207D8DF-DA1C-4ACD-B467-1B5E9DD3EFF8}"
-		}
-	},
+  "__firefox__applications": {
+    "gecko": {
+      "id": "{E207D8DF-DA1C-4ACD-B467-1B5E9DD3EFF8}"
+    }
+  },
 
-	"__chrome__minimum_chrome_version": "49",
-	"__opera__minimum_opera_version": "36",
+  "__chrome__minimum_chrome_version": "49",
+  "__opera__minimum_opera_version": "36",
 
-	"browser_action": {
-		"default_popup": "popup.html",
-		"default_icon": {
-			"16": "assets/icons/sizes/logo-icon-16x16.png",
-			"32": "assets/icons/sizes/logo-icon-32x32.png",
-			"48": "assets/icons/sizes/logo-icon-48x48.png",
-			"96": "assets/icons/sizes/logo-icon-96x96.png",
-			"120": "assets/icons/sizes/logo-icon-120x120.png",
-			"144": "assets/icons/sizes/logo-icon-144x144.png",
-			"310": "assets/icons/sizes/logo-icon-310x310.png"
-		},
-		"default_title": "Ideamarket",
-		"__chrome|opera__chrome_style": false,
-		"__firefox__browser_style": false
-	},
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/sizes/logo-icon-16x16.png",
+      "32": "assets/icons/sizes/logo-icon-32x32.png",
+      "48": "assets/icons/sizes/logo-icon-48x48.png",
+      "96": "assets/icons/sizes/logo-icon-96x96.png",
+      "120": "assets/icons/sizes/logo-icon-120x120.png",
+      "144": "assets/icons/sizes/logo-icon-144x144.png",
+      "310": "assets/icons/sizes/logo-icon-310x310.png"
+    },
+    "default_title": "Ideamarket",
+    "__chrome|opera__chrome_style": false,
+    "__firefox__browser_style": false
+  },
 
-	"__chrome|opera__options_page": "options.html",
-	"options_ui": {
-		"page": "options.html",
-		"open_in_tab": true,
-		"__chrome__chrome_style": false
-	},
+  "__chrome|opera__options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "__chrome__chrome_style": false
+  },
 
-	"background": {
-		"scripts": ["js/background.bundle.js"],
-		"__chrome|opera__persistent": false
-	},
+  "background": {
+    "scripts": ["js/background.bundle.js"],
+    "__chrome|opera__persistent": false
+  },
 
-	"content_scripts": [
-		{
-			"matches": ["https://twitter.com/*", "https://*.substack.com/*"],
-			"js": ["js/contentScript.bundle.js"],
-			"css": ["css/contentScript.css"]
-		}
-	]
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://*.substack.com/*"],
+      "js": ["js/contentScript.bundle.js"],
+      "css": ["css/contentScript.css"]
+    }
+  ]
 }
