@@ -27,10 +27,10 @@ module.exports = {
         'brand-new-dark': '#1a1d3f',
         'brand-border-gray': '#dce2e9',
         // extension-colors
-        'extension-dark-1': '#474747',
+        'extension-dim': '#15202b',
+        'extension-dark-1': '#000000',
         'extension-dark-2': '#575656',
-        'extension-light-1': '#f6f6f6',
-        'extension-light-2': '#fdfdfd',
+        'extension-light': '#fdfdfd',
         'extension-button-blue': '#0b3dd9',
       },
       fontFamily: {

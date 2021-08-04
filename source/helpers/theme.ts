@@ -7,7 +7,8 @@ type IdeaMarketThemesValue = {
 
 export const ideaMarketThemes: IdeaMarketThemesValue[] = [
   { value: 'System Default', label: 'System Default' },
-  { value: 'Light', label: 'Light' },
+  { value: 'Light', label: 'Default' },
+  { value: 'Dim', label: 'Dim' },
   { value: 'Dark', label: 'Dark' },
 ]
 
