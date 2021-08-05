@@ -37,36 +37,28 @@ browser.storage.local.get('sitesActivated').then(
   }
 )
 
-export function setThemeWithSelection() {
-  const root = document.getElementsByTagName('html')[0]
-  browser.storage.local.get('theme').then(
-    (item) => {
-      let { theme } = item
-      if (theme === 'System Default') {
-        theme = 'Light'
-        if (
-          window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-          theme = 'Dark'
-        }
-      }
-      if (theme === 'Dark') {
-        root.classList.add('dark')
-        return
-      }
-      root.classList.remove('dark')
-    },
-    () => {
-      // console.log('no theme selected')
-      if (
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      ) {
-        root.classList.add('dark')
-        return
-      }
-      root.classList.remove('dark')
+export async function getTheme() {
+  const response = await browser.storage.local.get('theme')
+  let { theme } = response
+  if (!theme || theme === 'System Default') {
+    theme = 'Light'
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      theme = 'Dark'
     }
-  )
+  }
+
+  return theme
+}
+
+export async function setThemeWithSelection() {
+  const root = document.getElementsByTagName('html')[0]
+  const theme = await getTheme()
+  if (theme === 'Dark') {
+    root.classList.add('dark')
+    return
+  }
+  root.classList.remove('dark')
 }

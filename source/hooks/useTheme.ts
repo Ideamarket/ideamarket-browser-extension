@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react"
-import { browser } from "webextension-polyfill-ts"
-import { intialSelectedTheme } from "../helpers/theme"
+import { getTheme, intialSelectedTheme } from "../helpers/theme"
 
 export default function useTheme() {
   const [theme, setTheme] = useState(intialSelectedTheme)
+
   useEffect(() => {
-    browser.storage.local.get('theme').then(
-      (item) => {
-        if (item?.theme) {
-          setTheme(item.theme)
-        }
-      },
-      () => {
-        console.log('no theme selected')
-      }
-    )
+    // This listener updates theme dynamically based on System Default
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', initTheme)
+
+    async function initTheme() {
+      const themeResponse = await getTheme()
+      setTheme(themeResponse)
+    }
+
+    initTheme()
+
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', initTheme)
+    }
   }, [])
 
   return { theme }

@@ -28,8 +28,7 @@ module.exports = {
         'brand-border-gray': '#dce2e9',
         // extension-colors
         'extension-dim': '#15202b',
-        'extension-dark-1': '#000000',
-        'extension-dark-2': '#575656',
+        'extension-dark': '#000000',
         'extension-light': '#fdfdfd',
         'extension-button-blue': '#0b3dd9',
       },

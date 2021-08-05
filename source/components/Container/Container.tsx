@@ -9,64 +9,70 @@ import useTheme from '../../hooks/useTheme'
 const Container: React.FC = () => {
   const { theme } = useTheme()
 
-  console.log('theme==', theme)
+  let bgStyles = 'bg-extension-light'
+  if (theme === 'Dark') bgStyles = 'dark:bg-extension-dark'
+  else if (theme === 'Dim') bgStyles = 'bg-extension-dim'
+  else if (theme === 'Light') bgStyles = 'bg-extension-light'
+
+  const unlistedStyles = classNames(
+    bgStyles,
+    "ideamarket-unlisted-container"
+  )
+
+  const rankStyles = classNames(
+    bgStyles,
+    "inline-block"
+  )
+
+  const innerPriceStyles = classNames(
+    bgStyles,
+    "inline-block"
+  )
+
+  const buttonStyles = classNames(
+    bgStyles,
+    "ideamarket-alert-bottom px-4 py-2"
+  )
+
+  const outerPriceStyles = classNames(
+    (theme === 'Dark' || theme === 'Dim') && 'text-white',
+    theme === 'Light' && 'text-black',
+    "text-xs ideamarket-price"
+  )
 
   return (
     <div>
       <div className={classNames(
-        (theme === 'Dark' || theme === 'Dim') && 'dark:bg-extension-dark-2 text-white',
-        theme === 'Light' && 'dark:bg-extension-dark-2 text-black',
+        (theme === 'Dark' || theme === 'Dim') && 'text-white',
+        theme === 'Light' && 'text-black',
         "fixed block overflow-auto text-center ideamarket-hover-alert"
       )}>
-        <div className="ideamarket-unlisted-container">Unlisted</div>
+        <div className={unlistedStyles}>Unlisted</div>
         <div className="ideamarket-listed-container">
-          <div className={classNames(
-            theme === 'Dark' && 'dark:bg-extension-dark-1',
-            theme === 'Dim' && 'bg-extension-dim',
-            theme === 'Light' && 'bg-extension-light',
-            "inline-block"
-          )}>
+          <div className={rankStyles}>
             <div className="ideamarket-listed-rank">17</div>
             <div>Rank</div>
           </div>
-          <div className={classNames(
-            theme === 'Dark' && 'dark:bg-extension-dark-1',
-            theme === 'Dim' && 'bg-extension-dim',
-            theme === 'Light' && 'bg-extension-light',
-            "inline-block"
-          )}>
+          <div className={innerPriceStyles}>
             <div className="ideamarket-listed-price">$2.41</div>
             <div className="ideamarket-listed-day-change">+5.73%</div>
           </div>
         </div>
-        <div className={classNames(
-          theme === 'Dark' && 'dark:bg-extension-dark-1',
-          theme === 'Dim' && 'bg-extension-dim',
-          theme === 'Light' && 'bg-extension-light',
-          "ideamarket-alert-bottom"
-        )}>
+        <div className={buttonStyles}>
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-unlisted-button">
+            <button className="font-bold text-white border-none rounded-full cursor-pointer bg-blue-700 w-full p-3 ideamarket-unlisted-button">
               List
             </button>
           </a>
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-listed-button">
+            <button className="font-bold text-white border-none rounded-full cursor-pointer bg-blue-700 w-full p-3 ideamarket-listed-button">
               Buy
             </button>
           </a>
-          <div className="font-bold ideamarket-powered-by-text">
-            Powered by{' '}
-            <span className="text-black dark:text-white">Ideamarket</span>
-          </div>
         </div>
       </div>
       <div className="absolute flex items-center justify-center pt-1 cursor-pointer ideamarket-listing">
-        <span className={classNames(
-          (theme === 'Dark' || theme === 'Dim') && 'text-white',
-          theme === 'Light' && 'text-black',
-          "text-xs ideamarket-price"
-        )}>$0.10</span>
+        <span className={outerPriceStyles}>$0.10</span>
         <img className="ideamarket-listed-logo max-w-max" src={icon} />
         <img
           className="opacity-50 ideamarket-unlisted-logo max-w-max"
