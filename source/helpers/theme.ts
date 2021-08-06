@@ -4,6 +4,10 @@ type IdeaMarketThemesValue = {
   value: string
   label: string
 }
+type IdeaMarketSites = {
+  value: string
+  label: string
+}
 
 export const ideaMarketThemes: IdeaMarketThemesValue[] = [
   { value: 'System Default', label: 'System Default' },
@@ -11,9 +15,13 @@ export const ideaMarketThemes: IdeaMarketThemesValue[] = [
   { value: 'Dim', label: 'Dim' },
   { value: 'Dark', label: 'Dark' },
 ]
+export const ideaMarketSitesActivated: IdeaMarketSites[] = [
+  { value: 'twitter', label: 'Twitter' },
+  { value: 'substack', label: 'Substack' },
+]
 
 export let intialSelectedTheme = 'System Default'
-export let intialSitesActivated = { twitter: true, substack: true }
+export let intialSitesActivated: { [name: string]: boolean } = { twitter: true, substack: true }
 
 browser.storage.local.get('theme').then(
   (item) => {

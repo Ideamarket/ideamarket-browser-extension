@@ -57,6 +57,7 @@ module.exports = {
       backgroundImage: () => ({
         'top-mobile': "url('../../assets/icons/topbg-mobile.svg')",
         'top-desktop': "url('../../assets/icons/topbg.svg')",
+        'options-image': "url('../../assets/OptionsBackground.png')",
       }),
       borderRadius: {
         xlg: '0.625rem',
