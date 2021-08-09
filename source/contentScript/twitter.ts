@@ -16,15 +16,25 @@ export const startIdeaMarketTwitter = () => {
 
 const usernameXPath =
   'div[data-testid="primaryColumn"] div > div:nth-child(2) > div > div> div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) span'
-const followinSectionXPath =
-  'div[data-testid="primaryColumn"] div > div:nth-child(2) > div > div> div > div:nth-child(2) > div:nth-child(5)'
+const profilePath =
+  'div[data-testid="primaryColumn"] > div > div:nth-child(2) > div > div > div > :nth-child(2)'
 
 const addIdeaMarketToProfile = () => {
   const usernameNode = document.querySelector(usernameXPath)
 
   if (usernameNode?.textContent.toLowerCase()) {
     const username = usernameNode?.textContent.toLowerCase()
-    const followingSectionNode = document.querySelector(followinSectionXPath)
+    const profileNode = document.querySelector(profilePath) // Element holding all profile elements
+    const profileElements = Array.prototype.slice.call(profileNode.getElementsByTagName('div'))
+    
+    let followingSectionNode = null
+
+    // Find needed node by using "followers" text. Need to do this because HTML elements change depending on each profile
+    profileElements.forEach(ele => {
+      if (ele.textContent.toLowerCase().includes('followers')) {
+        followingSectionNode = ele.parentNode
+      }
+    })
 
     addIdeaMarket(
       followingSectionNode,
