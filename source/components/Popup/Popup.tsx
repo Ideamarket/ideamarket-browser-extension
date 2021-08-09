@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames'
 import { browser } from 'webextension-polyfill-ts'
 import icon from '../../assets/icons/logo.png'
 import './styles.scss'
@@ -14,6 +15,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch'
 const Popup: React.FC = () => {
   const [theme, setTheme] = React.useState(intialSelectedTheme)
   const [formState, setFormState] = React.useState(intialSitesActivated)
+  const [isOptions, setIsOptions] = React.useState(false) // Is options page or extension overlay?
   React.useEffect(() => {
     browser.storage.local.get('theme').then(
       (item) => {
@@ -36,6 +38,10 @@ const Popup: React.FC = () => {
         console.log('no sitesActivated selected')
       }
     )
+
+    const optionsRoot = document.getElementById('options-root')
+    if (optionsRoot) setIsOptions(true)
+    else setIsOptions(false)
   }, [])
 
   function handleThemeChange(themeValue: string) {
@@ -67,7 +73,10 @@ const Popup: React.FC = () => {
   }
 
   return (
-    <section id="popup" className="w-screen h-screen overflow-hidden">
+    <section id="popup" className={classNames(
+      "overflow-hidden",
+      isOptions && 'w-screen h-screen',
+    )}>
       <nav className="w-full shadow bg-top-desktop pt-5 pb-5 text-center">
         <div
           className="flex justify-center cursor-pointer"
@@ -80,7 +89,10 @@ const Popup: React.FC = () => {
         </div>
       </nav>
       <div className="h-full bg-options-image bg-cover bg-center overflow-hidden">
-        <div className="flex w-min h-56 mx-auto mt-20 bg-white rounded-lg shadow-lg">
+        <div className={classNames(
+          "flex w-min h-56 mx-auto bg-white rounded-lg shadow-lg",
+          isOptions && 'mt-20'
+        )}>
           <div className="flex flex-col w-56 overflow-hidden">
             <div className="h-12 pl-6 border-solid border-0 border-b-2 border-gray-100">
               <h1>Theme</h1>

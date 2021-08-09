@@ -5,14 +5,15 @@ import loadingicon from '../../assets/icons/loading.svg'
 import disabledLogo from '../../assets/icons/disabledLogo.png'
 import './styles.scss'
 import useTheme from '../../hooks/useTheme'
+import { ThemeType } from '../../helpers/theme'
 
 const Container: React.FC = () => {
   const { theme } = useTheme()
 
   let bgStyles = 'bg-extension-light'
-  if (theme === 'Dark') bgStyles = 'dark:bg-extension-dark'
-  else if (theme === 'Dim') bgStyles = 'bg-extension-dim'
-  else if (theme === 'Light') bgStyles = 'bg-extension-light'
+  if (theme === ThemeType.Dark) bgStyles = 'dark:bg-extension-dark'
+  else if (theme === ThemeType.Dim) bgStyles = 'bg-extension-dim'
+  else if (theme === ThemeType.Light) bgStyles = 'bg-extension-light'
 
   const unlistedStyles = classNames(
     bgStyles,
@@ -35,16 +36,16 @@ const Container: React.FC = () => {
   )
 
   const outerPriceStyles = classNames(
-    (theme === 'Dark' || theme === 'Dim') && 'text-white',
-    theme === 'Light' && 'text-black',
+    (theme === ThemeType.Dark || theme === ThemeType.Dim) && 'text-white',
+    theme === ThemeType.Light && 'text-black',
     "text-xs ideamarket-price"
   )
 
   return (
     <div>
       <div className={classNames(
-        (theme === 'Dark' || theme === 'Dim') && 'text-white',
-        theme === 'Light' && 'text-black',
+        (theme === ThemeType.Dark || theme === ThemeType.Dim) && 'text-white',
+        theme === ThemeType.Light && 'text-black',
         "fixed block overflow-auto text-center ideamarket-hover-alert"
       )}>
         <div className={unlistedStyles}>Unlisted</div>
