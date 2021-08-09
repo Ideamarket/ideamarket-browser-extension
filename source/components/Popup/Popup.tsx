@@ -1,9 +1,8 @@
 import * as React from 'react'
 import classNames from 'classnames'
 import { browser } from 'webextension-polyfill-ts'
-import icon from '../../assets/icons/logo.png'
+import IconDefault from '../../assets/icons/icon-default.png'
 import './styles.scss'
-import { openWebPage } from '../../helpers'
 import {
   ideaMarketSitesActivated,
   ideaMarketThemes,
@@ -74,20 +73,9 @@ const Popup: React.FC = () => {
 
   return (
     <section id="popup" className={classNames(
-      "overflow-hidden",
+      "overflow-hidden font-inter-regular",
       isOptions && 'w-screen h-screen',
     )}>
-      <nav className="w-full shadow bg-top-desktop pt-5 pb-5 text-center">
-        <div
-          className="flex justify-center cursor-pointer"
-          onClick={() => openWebPage('https://ideamarket.io')}
-        >
-          <img className="block w-auto h-8" src={icon} alt="Workflow logo" />
-          <span className="w-auto h-full leading-none text-white text-3xl font-gilroy-bold">
-            Ideamarket
-          </span>
-        </div>
-      </nav>
       <div className="h-full bg-options-image bg-cover bg-center overflow-hidden">
         <div className={classNames(
           "flex w-min h-56 mx-auto bg-white rounded-lg shadow-lg",
@@ -109,7 +97,7 @@ const Popup: React.FC = () => {
             </div>
           </div>
           <div className="w-44 border-solid border-l-2 border-r-2 border-t-0 border-b-0 border-gray-100">
-            <img className="block w-full h-full object-cover" src={icon} alt="Ideamarket logo" />
+            <img className="block w-full h-full object-cover" src={IconDefault} alt="Ideamarket logo" />
           </div>
           <div className="flex flex-col w-56 overflow-hidden">
             <div className="h-12 pl-6 border-solid border-0 border-b-2 border-gray-100">

@@ -1,8 +1,9 @@
 import * as React from 'react'
 import classNames from 'classnames'
-import icon from '../../assets/icons/logo.png'
+import IconDefault from '../../assets/icons/icon-default.png'
 import loadingicon from '../../assets/icons/loading.svg'
-import disabledLogo from '../../assets/icons/disabledLogo.png'
+import IconBlack from '../../assets/icons/icon-black.png'
+import IconWhite from '../../assets/icons/icon-white.png'
 import './styles.scss'
 import useTheme from '../../hooks/useTheme'
 import { ThemeType } from '../../helpers/theme'
@@ -11,9 +12,18 @@ const Container: React.FC = () => {
   const { theme } = useTheme()
 
   let bgStyles = 'bg-extension-light'
-  if (theme === ThemeType.Dark) bgStyles = 'dark:bg-extension-dark'
-  else if (theme === ThemeType.Dim) bgStyles = 'bg-extension-dim'
-  else if (theme === ThemeType.Light) bgStyles = 'bg-extension-light'
+  let unlistedIcon = IconBlack
+  if (theme === ThemeType.Dark) {
+    bgStyles = 'dark:bg-extension-dark'
+    unlistedIcon = IconWhite
+  }
+  else if (theme === ThemeType.Dim) {
+    bgStyles = 'bg-extension-dim'
+    unlistedIcon = IconWhite
+  }
+  else if (theme === ThemeType.Light) {
+    bgStyles = 'bg-extension-light'
+  }
 
   const unlistedStyles = classNames(
     bgStyles,
@@ -74,10 +84,10 @@ const Container: React.FC = () => {
       </div>
       <div className="absolute flex items-center justify-center pt-1 cursor-pointer ideamarket-listing">
         <span className={outerPriceStyles}>$0.10</span>
-        <img className="ideamarket-listed-logo max-w-max" src={icon} />
+        <img className="ideamarket-listed-logo max-w-max" src={IconDefault} />
         <img
           className="opacity-50 ideamarket-unlisted-logo max-w-max"
-          src={disabledLogo}
+          src={unlistedIcon}
         />
         <img
           className="opacity-50 ideamarket-loading-icon max-w-max"

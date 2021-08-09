@@ -35,6 +35,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         'gilroy-bold': ['Gilroy-Bold', ...defaultTheme.fontFamily.sans],
+        'inter-regular': ['Inter-Regular', ...defaultTheme.fontFamily.sans],
         'sf-compact-medium': [
           'SF Compact Display Medium',
           ...defaultTheme.fontFamily.sans,
