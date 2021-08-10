@@ -65,6 +65,7 @@ module.exports = {
       },
       boxShadow: {
         home: '0 1px 5px 0 rgba(0, 0, 0, 0.05)',
+        container: '0 0 5px 1px #1d3059',
       },
       minHeight: {
         6: '1.5rem',
@@ -87,6 +88,10 @@ module.exports = {
       },
       textOpacity: {
         60: '0.6',
+      },
+      zIndex: {
+        '-10': '-10',
+        '-20': '-20',
       },
     },
   },

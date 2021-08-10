@@ -1,9 +1,12 @@
 import * as React from 'react'
 import classNames from 'classnames'
 import IconDefault from '../../assets/icons/icon-default.png'
-import loadingicon from '../../assets/icons/loading.svg'
 import IconBlack from '../../assets/icons/icon-black.png'
 import IconWhite from '../../assets/icons/icon-white.png'
+import IconBgLight from '../../assets/icons/icon-bg-light.png'
+import IconBgDim from '../../assets/icons/icon-bg-dim.png'
+import IconBgDark from '../../assets/icons/icon-bg-dark.png'
+import loadingicon from '../../assets/icons/loading.svg'
 import './styles.scss'
 import useTheme from '../../hooks/useTheme'
 import { ThemeType } from '../../helpers/theme'
@@ -11,65 +14,49 @@ import { ThemeType } from '../../helpers/theme'
 const Container: React.FC = () => {
   const { theme } = useTheme()
 
-  let bgStyles = 'bg-extension-light'
-  let unlistedIcon = IconBlack
+  let bgColor = 'bg-extension-light'
+  let textColor = 'text-white'
+  let unlistedIcon = IconWhite
+  let iconBg = IconBgLight
   if (theme === ThemeType.Dark) {
-    bgStyles = 'dark:bg-extension-dark'
-    unlistedIcon = IconWhite
+    bgColor = 'dark:bg-extension-dark'
+    iconBg = IconBgDark
   }
   else if (theme === ThemeType.Dim) {
-    bgStyles = 'bg-extension-dim'
-    unlistedIcon = IconWhite
+    bgColor = 'bg-extension-dim'
+    iconBg = IconBgDim
   }
   else if (theme === ThemeType.Light) {
-    bgStyles = 'bg-extension-light'
+    bgColor = 'bg-extension-light'
+    unlistedIcon = IconBlack
+    textColor = 'text-black'
   }
 
-  const unlistedStyles = classNames(
-    bgStyles,
-    "ideamarket-unlisted-container"
-  )
-
-  const rankStyles = classNames(
-    bgStyles,
-    "inline-block"
-  )
-
-  const innerPriceStyles = classNames(
-    bgStyles,
-    "inline-block"
-  )
-
-  const buttonStyles = classNames(
-    bgStyles,
-    "ideamarket-alert-bottom px-4 py-2"
-  )
-
   const outerPriceStyles = classNames(
-    (theme === ThemeType.Dark || theme === ThemeType.Dim) && 'text-white',
-    theme === ThemeType.Light && 'text-black',
+    textColor,
     "text-xs ideamarket-price"
   )
 
   return (
     <div>
       <div className={classNames(
-        (theme === ThemeType.Dark || theme === ThemeType.Dim) && 'text-white',
-        theme === ThemeType.Light && 'text-black',
-        "fixed block overflow-auto text-center ideamarket-hover-alert"
+        textColor,
+        bgColor,
+        "fixed block overflow-auto text-center ideamarket-hover-alert -z-20 shadow-container",
       )}>
-        <div className={unlistedStyles}>Unlisted</div>
+        <img className="absolute top-0 left-0 w-full h-full object-contain -z-10" src={iconBg} />
+        <div className="ideamarket-unlisted-container">Unlisted</div>
         <div className="ideamarket-listed-container">
-          <div className={rankStyles}>
+          <div className="inline-block">
             <div className="ideamarket-listed-rank">17</div>
             <div>Rank</div>
           </div>
-          <div className={innerPriceStyles}>
+          <div className="inline-block">
             <div className="ideamarket-listed-price">$2.41</div>
             <div className="ideamarket-listed-day-change">+5.73%</div>
           </div>
         </div>
-        <div className={buttonStyles}>
+        <div className="ideamarket-alert-bottom px-4 py-2">
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
             <button className="font-bold text-white border-none rounded-full cursor-pointer bg-blue-700 w-full p-3 ideamarket-unlisted-button">
               List
