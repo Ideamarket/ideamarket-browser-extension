@@ -17,7 +17,7 @@ export default function useTheme() {
       setTheme(themeResponse)
     }
 
-    function optionsChanged(changes?: any, areaName?: string) {
+    function optionsChanged(changes?: any) {
       const { newValue = ThemeType.Light } = changes?.theme
       setTheme(newValue)
       startIdeaMarket() // Need to rerender after setting new theme
