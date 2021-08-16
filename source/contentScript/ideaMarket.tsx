@@ -103,7 +103,7 @@ export function addIdeaMarket(
   } else {
     el.classList.add('ideamarket-loading')
   }
-  if (tweet.querySelector('.ideamarket-listing')) {
+  if (tweet?.querySelector('.ideamarket-listing')) {
     tweet.querySelector('.ideamarket-listing').replaceWith(el)
   } else {
     target.appendChild(el)

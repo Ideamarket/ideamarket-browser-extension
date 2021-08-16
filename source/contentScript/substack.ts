@@ -7,12 +7,15 @@ const getSubstackUsernameFromUrl = () =>
 
 const onCallback = () => {
   const username = getSubstackUsernameFromUrl()
-  addIdeaMarket(
-    document.querySelector('.headline'),
-    username,
-    document.querySelector('.headline'),
-    'substack'
-  )
+  if (document?.querySelector('.headline')) {
+    addIdeaMarket(
+      document.querySelector('.headline'),
+      username,
+      document.querySelector('.headline'),
+      'substack'
+    )
+  }
+  addToSubstacksOnScreen()
 }
 
 export function startIdeaMarketSubStack() {
