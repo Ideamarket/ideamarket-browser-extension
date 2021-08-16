@@ -107,17 +107,16 @@
 .ideamarket-hover-alert {
   font-family: sans-serif;
   width: 180px;
-  border: 2px solid rgba(112, 128, 144, 0.4);
+  border: 2px solid rgba(112, 128, 144, 1);
   border-radius: 10px;
   z-index: 4 !important;
   top: 5px;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
 
   .ideamarket-unlisted-container,
   .ideamarket-listed-container {
     font-weight: bold;
     font-size: 1.4em;
-    border-bottom: 2px solid rgba(112, 128, 144, 0.2);
+    border-bottom: 2px solid rgba(112, 128, 144, 1);
   }
 
   .ideamarket-unlisted-container {
@@ -129,7 +128,7 @@
       width: calc(50% - 1px);
       padding: 15px 0;
       &:first-of-type {
-        border-right: 2px solid rgba(112, 128, 144, 0.2);
+        border-right: 2px solid rgba(112, 128, 144, 1);
         > div:last-of-type {
           color: rgb(161, 171, 181);
         }
@@ -138,12 +137,6 @@
         font-size: 0.5em;
       }
     }
-  }
-
-  .ideamarket-button {
-    padding: 10px 20px;
-    background-color: blue;
-    margin: 10px;
   }
 
   .ideamarket-powered-by-text {

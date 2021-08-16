@@ -1,14 +1,7 @@
-// @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import '../../styles/fonts';
 
 body {
   margin: 0;
-}
-
-#popup {
-  font-family: sans-serif;
-  min-width: 350px;
-  min-height: 300px;
 }

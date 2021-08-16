@@ -28,7 +28,7 @@ function showAlert(event: MouseEvent, username: string) {
   addDataInAlertBox(hoverAlert, username)
   hoverAlert.setAttribute(
     'style',
-    `top:${event.clientY - 35}px;left:${event.clientX - 90}px`
+    `top:${event.clientY - 25}px;left:${event.clientX - 170}px`
   )
   function removeAlert(hoverAlert: HTMLElement) {
     hoverAlert?.parentNode?.removeChild(hoverAlert)

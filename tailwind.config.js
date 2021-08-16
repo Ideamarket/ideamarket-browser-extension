@@ -27,15 +27,15 @@ module.exports = {
         'brand-new-dark': '#1a1d3f',
         'brand-border-gray': '#dce2e9',
         // extension-colors
-        'extension-dark-1': '#474747',
-        'extension-dark-2': '#575656',
-        'extension-light-1': '#f6f6f6',
-        'extension-light-2': '#fdfdfd',
+        'extension-dim': '#15202b',
+        'extension-dark': '#000000',
+        'extension-light': '#fdfdfd',
         'extension-button-blue': '#0b3dd9',
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         'gilroy-bold': ['Gilroy-Bold', ...defaultTheme.fontFamily.sans],
+        'inter-regular': ['Inter-Regular', ...defaultTheme.fontFamily.sans],
         'sf-compact-medium': [
           'SF Compact Display Medium',
           ...defaultTheme.fontFamily.sans,
@@ -58,12 +58,14 @@ module.exports = {
       backgroundImage: () => ({
         'top-mobile': "url('../../assets/icons/topbg-mobile.svg')",
         'top-desktop': "url('../../assets/icons/topbg.svg')",
+        'options-image': "url('../../assets/OptionsBackground.png')",
       }),
       borderRadius: {
         xlg: '0.625rem',
       },
       boxShadow: {
         home: '0 1px 5px 0 rgba(0, 0, 0, 0.05)',
+        container: '0 0 5px 1px #1d3059',
       },
       minHeight: {
         6: '1.5rem',
@@ -86,6 +88,10 @@ module.exports = {
       },
       textOpacity: {
         60: '0.6',
+      },
+      zIndex: {
+        '-10': '-10',
+        '-20': '-20',
       },
     },
   },

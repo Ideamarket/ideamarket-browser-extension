@@ -4,15 +4,31 @@ type IdeaMarketThemesValue = {
   value: string
   label: string
 }
+type IdeaMarketSites = {
+  value: string
+  label: string
+}
+
+export const ThemeType = {
+  SystemDefault: 'System Default',
+  Light: 'Light',
+  Dim: 'Dim',
+  Dark: 'Dark',
+}
 
 export const ideaMarketThemes: IdeaMarketThemesValue[] = [
-  { value: 'System Default', label: 'System Default' },
-  { value: 'Light', label: 'Light' },
-  { value: 'Dark', label: 'Dark' },
+  { value: ThemeType.SystemDefault, label: 'System Default' },
+  { value: ThemeType.Light, label: 'Default' },
+  { value: ThemeType.Dim, label: 'Dim' },
+  { value: ThemeType.Dark, label: 'Dark' },
+]
+export const ideaMarketSitesActivated: IdeaMarketSites[] = [
+  { value: 'twitter', label: 'Twitter' },
+  { value: 'substack', label: 'Substack' },
 ]
 
-export let intialSelectedTheme = 'System Default'
-export let intialSitesActivated = { twitter: true, substack: true }
+export let intialSelectedTheme = ThemeType.SystemDefault
+export let intialSitesActivated: { [name: string]: boolean } = { twitter: true, substack: true }
 
 browser.storage.local.get('theme').then(
   (item) => {
@@ -36,36 +52,25 @@ browser.storage.local.get('sitesActivated').then(
   }
 )
 
-export function setThemeWithSelection() {
-  const root = document.getElementsByTagName('html')[0]
-  browser.storage.local.get('theme').then(
-    (item) => {
-      let { theme } = item
-      if (theme === 'System Default') {
-        theme = 'Light'
-        if (
-          window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-          theme = 'Dark'
-        }
-      }
-      if (theme === 'Dark') {
-        root.classList.add('dark')
-        return
-      }
-      root.classList.remove('dark')
-    },
-    () => {
-      // console.log('no theme selected')
-      if (
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      ) {
-        root.classList.add('dark')
-        return
-      }
-      root.classList.remove('dark')
+export async function getTheme() {
+  const response = await browser.storage.local.get('theme')
+  let { theme } = response
+  if (!theme || theme === ThemeType.SystemDefault) {
+    theme = ThemeType.Light
+    if (window?.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = ThemeType.Dark
     }
-  )
+  }
+
+  return theme
+}
+
+export async function setThemeWithSelection() {
+  const root = document.getElementsByTagName('html')[0]
+  const theme = await getTheme()
+  if (theme === ThemeType.Dark) {
+    root.classList.add('dark')
+    return
+  }
+  root.classList.remove('dark')
 }

@@ -1,47 +1,80 @@
 import * as React from 'react'
-import icon from '../../assets/icons/logo.png'
+import classNames from 'classnames'
+import IconDefault from '../../assets/icons/icon-default.png'
+import IconBlack from '../../assets/icons/icon-black.png'
+import IconWhite from '../../assets/icons/icon-white.png'
+import IconBgLight from '../../assets/icons/icon-bg-light.png'
+import IconBgDim from '../../assets/icons/icon-bg-dim.png'
+import IconBgDark from '../../assets/icons/icon-bg-dark.png'
 import loadingicon from '../../assets/icons/loading.svg'
-import disabledLogo from '../../assets/icons/disabledLogo.png'
 import './styles.scss'
+import useTheme from '../../hooks/useTheme'
+import { ThemeType } from '../../helpers/theme'
 
 const Container: React.FC = () => {
+  const { theme } = useTheme()
+
+  let bgColor = 'bg-extension-light'
+  let textColor = 'text-white'
+  let unlistedIcon = IconWhite
+  let iconBg = IconBgLight
+  if (theme === ThemeType.Dark) {
+    bgColor = 'dark:bg-extension-dark'
+    iconBg = IconBgDark
+  }
+  else if (theme === ThemeType.Dim) {
+    bgColor = 'bg-extension-dim'
+    iconBg = IconBgDim
+  }
+  else if (theme === ThemeType.Light) {
+    bgColor = 'bg-extension-light'
+    unlistedIcon = IconBlack
+    textColor = 'text-black'
+  }
+
+  const outerPriceStyles = classNames(
+    textColor,
+    "text-xs ideamarket-price"
+  )
+
   return (
     <div>
-      <div className="fixed block overflow-auto text-center text-black ideamarket-hover-alert bg-extension-light-2 dark:bg-extension-dark-2 dark:text-white">
+      <div className={classNames(
+        textColor,
+        bgColor,
+        "fixed block overflow-auto text-center ideamarket-hover-alert -z-20 shadow-container",
+      )}>
+        <img className="absolute top-0 left-0 w-full h-full object-contain -z-10" src={iconBg} />
         <div className="ideamarket-unlisted-container">Unlisted</div>
         <div className="ideamarket-listed-container">
           <div className="inline-block">
             <div className="ideamarket-listed-rank">17</div>
             <div>Rank</div>
           </div>
-          <div className="inline-block bg-extension-light-1 dark:bg-extension-dark-1">
+          <div className="inline-block">
             <div className="ideamarket-listed-price">$2.41</div>
             <div className="ideamarket-listed-day-change">+5.73%</div>
           </div>
         </div>
-        <div className="ideamarket-alert-bottom bg-extension-light-1 dark:bg-extension-dark-1">
+        <div className="ideamarket-alert-bottom px-4 py-2">
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-unlisted-button">
+            <button className="font-bold text-white border-none rounded-full cursor-pointer bg-blue-700 w-full p-3 ideamarket-unlisted-button">
               List
             </button>
           </a>
           <a href="https://ideamarket.io" target="_blank" rel="noreferrer">
-            <button className="font-bold text-white border-none rounded-lg cursor-pointer ideamarket-button ideamarket-listed-button">
+            <button className="font-bold text-white border-none rounded-full cursor-pointer bg-blue-700 w-full p-3 ideamarket-listed-button">
               Buy
             </button>
           </a>
-          <div className="font-bold ideamarket-powered-by-text">
-            Powered by{' '}
-            <span className="text-black dark:text-white">Ideamarket</span>
-          </div>
         </div>
       </div>
       <div className="absolute flex items-center justify-center pt-1 cursor-pointer ideamarket-listing">
-        <span className="text-xs text-black ideamarket-price dark:text-white">$0.10</span>
-        <img className="ideamarket-listed-logo max-w-max" src={icon} />
+        <span className={outerPriceStyles}>$0.10</span>
+        <img className="ideamarket-listed-logo max-w-max" src={IconDefault} />
         <img
           className="opacity-50 ideamarket-unlisted-logo max-w-max"
-          src={disabledLogo}
+          src={unlistedIcon}
         />
         <img
           className="opacity-50 ideamarket-loading-icon max-w-max"
