@@ -49,14 +49,16 @@ export const addToTweetsOnScreen = () => {
   const allTweets = document.querySelectorAll('div[data-testid="tweet"]')
 
   allTweets.forEach((tweet) => {
-    const username = tweet
-      .querySelector(':scope > div:last-of-type a > div > div:last-of-type')
-      .textContent.toLowerCase()
-    addIdeaMarket(
-      tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)'),
-      username,
-      tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)')
-    )
+    const usernameElement = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type')
+    if (usernameElement) {
+      const username = usernameElement.textContent.toLowerCase()
+      addIdeaMarket(
+        tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)'),
+        username,
+        tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)')
+      )
+    }
+    
   })
 }
 
@@ -72,10 +74,11 @@ const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
   }
 
   allTweets.forEach((tweet) => {
-    const username = tweet
-      .querySelector(':scope > div:last-of-type a > div > div:last-of-type')
-      .textContent.toLowerCase()
-    allUserNames.push(username)
+    const usernameElement = tweet.querySelector(':scope > div:last-of-type a > div > div:last-of-type')
+    if (usernameElement) {
+      const username = usernameElement.textContent.toLowerCase()
+      allUserNames.push(username)
+    }
   })
 
   getIdeaMarketData(allUserNames, 'Twitter').then((data: any) => {

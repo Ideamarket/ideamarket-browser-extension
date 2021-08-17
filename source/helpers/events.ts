@@ -57,7 +57,9 @@ export function detectChangesOnElement(
 }
 
 export function detectChangesInColoumn(targetNode: Node, callback: () => void) {
-  detectChangesOnElement(targetNode, function () {
-    callback()
-  })
+  if (targetNode) {
+    detectChangesOnElement(targetNode, function () {
+      callback()
+    })
+  }
 }
