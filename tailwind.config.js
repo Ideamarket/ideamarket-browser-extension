@@ -56,8 +56,6 @@ module.exports = {
         'tightest-2': '-0.018125rem', // -0.29px;
       },
       backgroundImage: () => ({
-        'top-mobile': "url('../../assets/icons/topbg-mobile.svg')",
-        'top-desktop': "url('../../assets/icons/topbg.svg')",
         'options-image': "url('../../assets/OptionsBackground.png')",
       }),
       borderRadius: {
