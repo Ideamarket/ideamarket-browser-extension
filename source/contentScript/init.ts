@@ -22,31 +22,15 @@ const initOnTwitter = () => {
 }
 
 const initOnSubstack = () => {
-  waitForElementToDisplay(
-    '.publications',
-    () => {
-      startIdeaMarket()
-    },
-    1000,
-    100000
-  )
+  waitForElementToDisplay('.publications', startIdeaMarket, 1000, 100000)
 
   waitForElementToDisplay(
     '.container > a.headline',
-    () => {
-      startIdeaMarket()
-    },
+    startIdeaMarket,
     1000,
     100000
   )
-  waitForElementToDisplay(
-    '.search-results',
-    () => {
-      startIdeaMarket()
-    },
-    1000,
-    100000
-  )
+  waitForElementToDisplay('.search-results', startIdeaMarket, 1000, 100000)
 }
 
 const init = async () => {
