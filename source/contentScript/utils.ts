@@ -10,7 +10,7 @@ export function onMouseEnter(event: MouseEvent, username: string) {
 
   timeouts[username] = setTimeout(function () {
     showAlert(event, username)
-  }, 350)
+  }, 175)
 }
 
 export function onMouseLeave(username: string) {

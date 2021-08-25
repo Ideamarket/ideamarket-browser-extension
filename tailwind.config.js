@@ -63,7 +63,7 @@ module.exports = {
       },
       boxShadow: {
         home: '0 1px 5px 0 rgba(0, 0, 0, 0.05)',
-        container: '0 0 5px 1px #1d3059',
+        container: '0px 0px 5px rgba(38, 86, 216, 0.5)',
       },
       minHeight: {
         6: '1.5rem',
