@@ -16,15 +16,18 @@ const Container: React.FC = () => {
 
   let bgColor = 'bg-extension-light'
   let textColor = 'text-white'
+  let borderColor = 'border-light'
   let unlistedIcon = IconWhite
   let iconBg = IconBgLight
   if (theme === ThemeType.Dark) {
     bgColor = 'dark:bg-extension-dark'
     iconBg = IconBgDark
+    borderColor = 'border-dark'
   }
   else if (theme === ThemeType.Dim) {
     bgColor = 'bg-extension-dim'
     iconBg = IconBgDim
+    borderColor = 'border-dim'
   }
   else if (theme === ThemeType.Light) {
     bgColor = 'bg-extension-light'
@@ -42,12 +45,13 @@ const Container: React.FC = () => {
       <div className={classNames(
         textColor,
         bgColor,
-        "fixed block overflow-auto text-center ideamarket-hover-alert -z-20 shadow-container",
+        borderColor,
+        "fixed block overflow-auto text-center ideamarket-hover-alert z-20 border-2 border-solid rounded-lg shadow-container overflow-none",
       )}>
         <img className="absolute top-0 left-0 w-full h-full object-contain -z-10" src={iconBg} />
-        <div className="ideamarket-unlisted-container">Unlisted</div>
-        <div className="ideamarket-listed-container">
-          <div className="inline-block">
+        <div className={classNames(borderColor, "ideamarket-unlisted-container border-b-2 border-solid")}>Unlisted</div>
+        <div className={classNames(borderColor, "ideamarket-listed-container border-b-2 border-solid")}>
+          <div className={classNames(borderColor, "inline-block border-r-2 border-solid")}>
             <div className="ideamarket-listed-rank">17</div>
             <div>Rank</div>
           </div>

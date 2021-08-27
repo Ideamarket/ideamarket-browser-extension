@@ -103,19 +103,30 @@
   }
 }
 
+.border-dark {
+  border-color: #2F3336;
+}
+
+.border-dim {
+  border-color: #38444D;
+}
+
+.border-light {
+  border-color: #EFF3F4;
+}
+
 .ideamarket-hover-alert {
   font-family: sans-serif;
   width: 180px;
-  border: 2px solid rgba(112, 128, 144, 1);
-  border-radius: 10px;
-  z-index: 4 !important;
   top: 5px;
 
   .ideamarket-unlisted-container,
   .ideamarket-listed-container {
     font-weight: bold;
     font-size: 1.4em;
-    border-bottom: 2px solid rgba(112, 128, 144, 1);
+    border-left: none;
+    border-right: none;
+    border-top: none;
   }
 
   .ideamarket-unlisted-container {
@@ -127,7 +138,9 @@
       width: calc(50% - 1px);
       padding: 15px 0;
       &:first-of-type {
-        border-right: 2px solid rgba(112, 128, 144, 1);
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
         > div:last-of-type {
           color: rgb(161, 171, 181);
         }
