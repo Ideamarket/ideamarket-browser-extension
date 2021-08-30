@@ -20,4 +20,9 @@ export const listingsData: Listings = {
   // }
 }
 
+export const fetchedUserNames: Array<string> = []
+
+export const fetchedTokens: Array<unknown> = []
+
+
 init()

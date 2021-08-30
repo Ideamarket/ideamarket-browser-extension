@@ -93,3 +93,9 @@ export function addDataToListingsData(allUserNames: string[], tokens: any[]) {
   })
   return true
 }
+
+export const unique = (myArray:Array<string>) =>
+  myArray.filter((v: string, i: number, a: Array<unknown>) => a.indexOf(v) === i)
+
+export const difference = (arr1: Array<string>, arr2: Array<string>) =>
+  arr1.filter((x: string) => !arr2.includes(x))
