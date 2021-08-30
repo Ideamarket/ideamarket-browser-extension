@@ -25,6 +25,7 @@ export function startIdeaMarket() {
   const currentDomain = window.location.host
   // Set theme according to selection
   setThemeWithSelection()
+
   if (currentDomain.includes('twitter.com')) {
     waitForElementToDisplay(
       'div[data-testid="tweet"]',

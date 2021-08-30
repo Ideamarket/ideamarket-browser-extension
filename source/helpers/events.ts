@@ -39,8 +39,8 @@ export function detectChangesOnElement(
   targetNode: Node,
   callbackTrigger: { (): void; (): void }
 ) {
-  let lastExcecutionTime = new Date().getTime()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let lastExcecutionTime = new Date().getTime()
   const callback = (mutationsList: any) => {
     for (const mutation of mutationsList) {
       if (mutation.type == 'childList') {

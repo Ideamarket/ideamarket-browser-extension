@@ -61,7 +61,7 @@ function addDataInAlertBox(hoverAlert: HTMLElement, username: string) {
       dayChangeDiv.classList.add('text-brand-green')
       dayChangeDiv.textContent = '+' + userdata.dayChange
     }
-    (hoverAlert.querySelector('.ideamarket-listed-button')
+    ;(hoverAlert.querySelector('.ideamarket-listed-button')
       .parentNode as Element).setAttribute(
       'href',
       `https://ideamarket.io/i/${userdata.market}/${
@@ -93,3 +93,20 @@ export function addDataToListingsData(allUserNames: string[], tokens: any[]) {
   })
   return true
 }
+
+export const debounce = (callback: any, wait: number) => {
+  let timeoutId: any = null
+  return (...args: any) => {
+    window.clearTimeout(timeoutId)
+    timeoutId = window.setTimeout(() => {
+      // eslint-disable-next-line prefer-spread
+      callback.apply(null, args)
+    }, wait)
+  }
+}
+
+export const unique = (myArray: any) =>
+  myArray.filter((v: any, i: any, a: any) => a.indexOf(v) === i)
+
+export const difference = (arr1: Array<string>, arr2: Array<string>) =>
+  arr1.filter((x: any) => !arr2.includes(x))
