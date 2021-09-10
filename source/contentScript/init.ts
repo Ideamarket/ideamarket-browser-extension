@@ -4,7 +4,7 @@ import { checkURLchange, waitForElementToDisplay } from '../helpers/events'
 
 const initOnTwitter = () => {
   waitForElementToDisplay(
-    'div[data-testid="tweet"]',
+    'article[data-testid="tweet"]',
     () => {
       startIdeaMarket()
       // when url is changed in twitter restart

@@ -28,7 +28,7 @@ export function startIdeaMarket() {
 
   if (currentDomain.includes('twitter.com')) {
     waitForElementToDisplay(
-      'div[data-testid="tweet"]',
+      'article[data-testid="tweet"]',
       () => {
         startIdeaMarketTwitter()
         // If there are changes in tweets, restart
