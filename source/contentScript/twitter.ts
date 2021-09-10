@@ -49,25 +49,26 @@ const addIdeaMarketToProfile = () => {
 }
 
 export const addToTweetsOnScreen = () => {
-  const allTweets = document.querySelectorAll('div[data-testid="tweet"]')
+  const allTweets = document.querySelectorAll('article[data-testid="tweet"]')
 
   allTweets.forEach((tweet) => {
     const usernameElement = tweet.querySelector(
-      ':scope > div:last-of-type a > div > div:last-of-type'
+      ':scope > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(1) >div:nth-child(1) > a > div > div:nth-child(2)'
     )
     if (usernameElement) {
       const username = usernameElement.textContent.toLowerCase()
+      const divToRightOfProfileImagePath = ':scope > div > div > div > div:nth-child(2) > div:nth-child(2)'
       addIdeaMarket(
-        tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)'),
+        tweet.querySelector(divToRightOfProfileImagePath),
         username,
-        tweet.querySelector(':scope > div:nth-child(2) > div:nth-child(1)')
+        tweet.querySelector(divToRightOfProfileImagePath)
       )
     }
   })
 }
 
 const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
-  const allTweets = document.querySelectorAll('div[data-testid="tweet"]')
+  const allTweets = document.querySelectorAll('article[data-testid="tweet"]')
 
   const usernameNode = document.querySelector(usernameXPath)
 
@@ -79,7 +80,7 @@ const getDataForAllTweetsOnScreen = (onSuccess: { (): void; (): void }) => {
 
   allTweets.forEach((tweet) => {
     const usernameElement = tweet.querySelector(
-      ':scope > div:last-of-type a > div > div:last-of-type'
+      ':scope > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(1) >div:nth-child(1) > a > div > div:nth-child(2)'
     )
     if (usernameElement) {
       const username = usernameElement.textContent.toLowerCase()
